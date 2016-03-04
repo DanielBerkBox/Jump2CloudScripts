@@ -6,7 +6,7 @@ handlers.getPlayerData = function (args) {
     var playerCurrency = server.AddUserVirtualCurrency({
         PlayFabId: currentPlayerId,
         VirtualCurrency: "GO",
-        Amount : 1
+        Amount : 0
         }
     )
 
