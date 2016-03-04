@@ -6,16 +6,16 @@ handlers.getPlayerData = function (args) {
     var playerCurrency = server.AddUserVirtualCurrency({
         PlayFabId: currentPlayerId,
         VirtualCurrency: "GO",
-        Amount : 0
+        Amount : 1
         }
     )
 
-    if (playerCurrency.Data["Balance"]) {
+    /*if (playerCurrency.Data["Balance"]) {
         //log.info("Player " + currentPlayerId + " already completed level " + levelNum);
         playerCoins = playerCurrency.Data["Balance"];
-    }
+    }*/
 
     return {
-        coins: playerCoins
+        coins: playerCurrency
     };
 }
