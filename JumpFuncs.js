@@ -10,12 +10,13 @@ handlers.getPlayerData = function (args) {
         }
     )
 
-    /*if (playerCurrency.Data["Balance"]) {
+    //if (playerCurrency.Data["Balance"]) {
+    if (playerCurrency["Balance"]) {
         //log.info("Player " + currentPlayerId + " already completed level " + levelNum);
-        playerCoins = playerCurrency.Data["Balance"];
-    }*/
+        playerCoins = playerCurrency["Balance"];
+    }
 
     return {
-        coins: playerCurrency
+        coins: playerCoins
     };
 }
