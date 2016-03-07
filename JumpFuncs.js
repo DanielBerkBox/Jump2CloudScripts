@@ -74,7 +74,7 @@ handlers.getPlayerData = function (args) {
     var playerDataTeste = server.GetUserData(
 	{
 	    PlayFabId: currentPlayerId,
-	    Keys: ["genre"]
+	    Keys: ["genre","color"]
 	});
 
     // Did they already complete this level?
