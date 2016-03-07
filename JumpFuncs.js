@@ -39,7 +39,7 @@ handlers.getPlayerData = function (args) {
     var playerData = server.GetUserData(
 	{
 	    PlayFabId: currentPlayerId,
-	    Keys: ["genre", "color", "wins", "held", "horsesnum"]
+	    Keys: keysPlayerData
 	});
 
     if (playerData.Data) {
@@ -68,20 +68,7 @@ handlers.getPlayerData = function (args) {
             jhorsesnum = parseInt(horsesaux.Value);
         }
     }
-
-    var datateste = 0;
-    // Get the user's internal data
-    var playerDataTeste = server.GetUserData(
-	{
-	    PlayFabId: currentPlayerId,
-	    Keys: ["genre","color","wins","held","horsesnum"]
-	});
-
-    // Did they already complete this level?
-    if (playerDataTeste.Data["genre"]) {
-        var dtaux = playerDataTeste.Data["genre"];
-        datateste = parseInt(dtaux.Value);         
-    }
+       
 
     return {
         coins: playerCoins,
@@ -90,9 +77,7 @@ handlers.getPlayerData = function (args) {
         color: jcolor,
         wins: jwins,
         held: jheld,
-        horsesnum: jhorsesnum,
-        valteste: datateste,
-        playerData: playerData.data
+        horsesnum: jhorsesnum     
 
     };
 }
