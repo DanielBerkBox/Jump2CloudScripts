@@ -42,32 +42,32 @@ handlers.getPlayerData = function (args) {
 	    Keys: ["genre", "color", "wins", "held", "horsesnum"]
 	});
 
-    //if (playerData.data) {
-        if (playerData.data["genre"]) {
+    if (playerData.Data) {
+        if (playerData.Data["genre"]) {
             var genreaux = playerData.Data["genre"];
             jgenre = parseInt(genreaux.Value);
         }
 
-        if (playerData.data["color"]) {
+        if (playerData.Data["color"]) {
             var jcoloraux = playerData.Data["color"];
             jcolor = parseInt(jcoloraux.Value);
         }
 
-        if (playerData.data["wins"]) {
+        if (playerData.Data["wins"]) {
             var winsaux = playerData.Data["wins"];
             jwins = parseInt(winsaux.Value);
         }
 
-        if (playerData.data["held"]) {
+        if (playerData.Data["held"]) {
             var heldaux = playerData.Data["held"];
             jheld = parseInt(heldaux.Value);
         }
 
-        if (playerData.data["horsesnum"]) {
+        if (playerData.Data["horsesnum"]) {
             var horsesaux = playerData.Data["horsesnum"];
             jhorsesnum = parseInt(horsesaux.Value);
         }
-    //}
+    }
 
     var datateste = 0;
     // Get the user's internal data
