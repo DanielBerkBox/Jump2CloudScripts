@@ -42,30 +42,31 @@ handlers.getPlayerData = function (args) {
 	    Keys: keysPlayerData
 	});
 
-    if (playerData.data["genre"])
-    {
-        var genreaux = playerData.Data["genre"];
-        jgenre = parseInt(genreaux.Value);
-    }
+    if (playerData.data) {
+        if (playerData.data["genre"]) {
+            var genreaux = playerData.Data["genre"];
+            jgenre = parseInt(genreaux.Value);
+        }
 
-    if (playerData.data["color"]) {
-        var jcoloraux = playerData.Data["color"];
-        jcolor = parseInt(jcoloraux.Value);
-    }
+        if (playerData.data["color"]) {
+            var jcoloraux = playerData.Data["color"];
+            jcolor = parseInt(jcoloraux.Value);
+        }
 
-    if (playerData.data["wins"]) {
-        var winsaux = playerData.Data["wins"];
-        jwins = parseInt(winsaux.Value);
-    }
+        if (playerData.data["wins"]) {
+            var winsaux = playerData.Data["wins"];
+            jwins = parseInt(winsaux.Value);
+        }
 
-    if (playerData.data["held"]) {
-        var heldaux = playerData.Data["held"];
-        jheld = parseInt(heldaux.Value);
-    }
+        if (playerData.data["held"]) {
+            var heldaux = playerData.Data["held"];
+            jheld = parseInt(heldaux.Value);
+        }
 
-    if (playerData.data["horsesnum"]) {
-        var horsesaux = playerData.Data["horsesnum"];
-        jhorsesnum = parseInt(horsesaux.Value);
+        if (playerData.data["horsesnum"]) {
+            var horsesaux = playerData.Data["horsesnum"];
+            jhorsesnum = parseInt(horsesaux.Value);
+        }
     }
 
     return {
