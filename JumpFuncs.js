@@ -39,7 +39,7 @@ handlers.getPlayerData = function (args) {
     var playerData = server.GetUserData(
 	{
 	    PlayFabId: currentPlayerId,
-	    Keys: keysPlayerData
+	    Keys: ["genre", "color", "wins", "held", "horsesnum"]
 	});
 
     if (playerData.data) {
