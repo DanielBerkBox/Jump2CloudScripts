@@ -76,7 +76,8 @@ handlers.getPlayerData = function (args) {
         color: jcolor,
         wins: jwins,
         held: jheld,
-        horsesnum:jhorsesnum
+        horsesnum: jhorsesnum,
+        playerData: playerData.data
 
     };
 }
