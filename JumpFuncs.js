@@ -42,7 +42,7 @@ handlers.getPlayerData = function (args) {
 	    Keys: ["genre", "color", "wins", "held", "horsesnum"]
 	});
 
-    if (playerData.data) {
+    //if (playerData.data) {
         if (playerData.data["genre"]) {
             var genreaux = playerData.Data["genre"];
             jgenre = parseInt(genreaux.Value);
@@ -67,7 +67,7 @@ handlers.getPlayerData = function (args) {
             var horsesaux = playerData.Data["horsesnum"];
             jhorsesnum = parseInt(horsesaux.Value);
         }
-    }
+    //}
 
     var datateste = 0;
     // Get the user's internal data
