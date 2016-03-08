@@ -10,7 +10,7 @@ handlers.getPlayerData = function (args) {
     var jheld = 0;
     var jhorsesnum = 0;
 
-    var keysPlayerData = ["genre", "color", "wins", "held", "horsesnum"];
+    var keysPlayerData = ["gender", "color", "wins", "held", "horsesnum"];
 
     var playerCurrency = server.AddUserVirtualCurrency({
         PlayFabId: currentPlayerId,
