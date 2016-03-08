@@ -4,7 +4,7 @@ handlers.getPlayerData = function (args) {
 
     var playerCoins = 0;
     var playerGem = 0;
-    var jgenre = 1;
+    var jgender = 1;
     var jcolor = 1;
     var jwins = 0;
     var jheld = 0;
@@ -43,9 +43,9 @@ handlers.getPlayerData = function (args) {
 	});
 
     if (playerData.Data) {
-        if (playerData.Data["genre"]) {
-            var genreaux = playerData.Data["genre"];
-            jgenre = parseInt(genreaux.Value);
+        if (playerData.Data["gender"]) {
+            var genreaux = playerData.Data["gender"];
+            jgender = parseInt(genreaux.Value);
         }
 
         if (playerData.Data["color"]) {
@@ -73,7 +73,7 @@ handlers.getPlayerData = function (args) {
     return {
         coins: playerCoins,
         gems: playerGem,
-        genre: jgenre,
+        gender: jgender,
         color: jcolor,
         wins: jwins,
         held: jheld,
