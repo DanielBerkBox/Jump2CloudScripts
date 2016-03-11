@@ -85,8 +85,9 @@ handlers.getPlayerData = function (args) {
 // retorna dados extendidos (horses,time server, items etc)
 handlers.getPlayerDataExt = function (args) {
 
+    var now = Date.now();
     return {
         horses: "teste,teste",
-        serverTime: Date.now().toUTCString()
+        serverTime: Date(now).toUTCString()
     };
 }
