@@ -77,8 +77,16 @@ handlers.getPlayerData = function (args) {
         color: jcolor,
         wins: jwins,
         held: jheld,
-        horsesnum: jhorsesnum,
-        serverTime: Date.now().toUTCString()
+        horsesnum: jhorsesnum
+        
+    };
+}
 
+// retorna dados extendidos (horses,time server, items etc)
+handlers.getPlayerDataExt = function (args) {
+
+    return {
+        horses: "teste,teste",
+        serverTime: Date.now().toUTCString()
     };
 }
