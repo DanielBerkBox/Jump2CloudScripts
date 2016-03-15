@@ -88,6 +88,12 @@ handlers.getPlayerDataExt = function (args) {
     var now = new Date();
     return {
         horses: "teste,teste",
-        serverTime: now.toString()
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        day: now.getDate(),
+        hours: now.getHours(),
+        minuts: now.getMinutes(),
+        seconds: now.getSeconds()
+        
     };
 }
