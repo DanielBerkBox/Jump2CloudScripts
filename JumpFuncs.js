@@ -186,7 +186,7 @@ handlers.buyHorse = function (args) {
     dataux["horsesnum"] = jhorsesnum.toString();
     dataux["horsesids"] = GetHorseIdsString(jhorsesids);
 
-    server.UpdateUserDate({
+    server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
         "Data":dataux
