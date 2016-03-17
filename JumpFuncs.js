@@ -147,12 +147,20 @@ handlers.buyHorse = function (args) {
     if(horsedata.coinsPrice > playerCash.playerCoins)
     {
         return {
-            ret: -1
+            ret: "-1",
+            playerCoins: playerCash.playerCoins.toString(),
+            coinsPrice: horsedata.coinsPrice.toString(),
+            playerGem: playerCash.playerGem.toString(),
+            gemsPrice: horsedata.gemsPrice.toString()
         }
     }
     if (horsedata.gemsPrice > playerCash.playerGem) {
         return {
-            ret: -2
+            ret: "-2",
+            playerCoins: playerCash.playerCoins.toString(),
+            coinsPrice: horsedata.coinsPrice.toString(),
+            playerGem: playerCash.playerGem.toString(),
+            gemsPrice: horsedata.gemsPrice.toString()
         }
     }
         
