@@ -243,7 +243,7 @@ function GetPlayerCurrency()
 }
 function GetHorseDataFromString(aStr) {
 
-    var arraux = aStr.split(",");
+    var sts = aStr.split(",");
     var lidx = 0;
     var horseData = {
 
