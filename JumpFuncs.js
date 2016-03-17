@@ -189,7 +189,8 @@ handlers.buyHorse = function (args) {
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
-        "Data":dataux
+        "Data": dataux,
+        "Permission": "Public"
     });
     var playerCurrency = server.SubtractUserVirtualCurrency({
         PlayFabId: currentPlayerId,
@@ -198,13 +199,16 @@ handlers.buyHorse = function (args) {
 
      }
     )
-    var playerCurrency = server.SubtractUserVirtualCurrency({
-        PlayFabId: currentPlayerId,
-        VirtualCurrency: "GE",
-        Amount: horsedata.gemsPrice
+    log.info("log gemsPrice " + horsedata.gemsPrice.toString());
+    if (horsedata.gemsPrice > 0) {
+        var playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: horsedata.gemsPrice
 
+        }
+       )
     }
-   )
 
 
     return {
