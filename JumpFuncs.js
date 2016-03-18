@@ -152,6 +152,7 @@ handlers.getHorseData = function (args) {
 }
 handlers.buyHorse = function (args) {
 
+    var now = new Date();
     var strhorse = args.strhorse;
     var stritem = args.stritem;
     var horsedata = GetHorseDataFromString(strhorse);
