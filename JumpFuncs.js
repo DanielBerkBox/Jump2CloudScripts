@@ -199,7 +199,7 @@ handlers.buyHorse = function (args) {
 
      }
     )
-    log.info("log gemsPrice " + horsedata.gemsPrice.toString() + " " + dataux["horsesids"]);
+    log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + " " + dataux["horsesids"]);
     if (horsedata.gemsPrice > 0) {
         var playerCurrency = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
@@ -365,7 +365,7 @@ function GetHorseString(aHorse) {
 
 }
 
-function GetHorseIdsFromString(str) {
+function GetHorseIdsFromString(aStr) {
 
     var arraux = aStr.split(",");
     return arraux;
