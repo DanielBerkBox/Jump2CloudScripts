@@ -373,15 +373,13 @@ function GetHorseIdsFromString(aStr) {
 }
 
 function GetHorseIdsString(aIds) {
-
-    var arIds = [];
-    arIds = aIds;
+       
     var cont = 0;
     var strret;
-    for (var id in arIds) {
+    for (var id in aIds) {
 
         if (cont == 0) {
-            strret = id;
+            strret = "xx" + id;
         }
         else {
             strret += ",";
@@ -390,7 +388,7 @@ function GetHorseIdsString(aIds) {
         cont++;
     }
 
-    return "1," + strret.toString() + "," + aIds.length.toString() + "," + "1,2";//strret;
+    return "1," + strret.toString() + "," + aIds.length.toString();//strret;
 }
 
 function GetHorseItemFromString(str) {
