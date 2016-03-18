@@ -82,13 +82,12 @@ handlers.getPlayerData = function (args) {
     };
 }
 
-// retorna dados extendidos (horses,time server, items etc)
+// retorna dados extendidos (horsesids,time server)
 handlers.getPlayerDataExt = function (args) {
 
     var now = new Date();
     var keysPlayerData = ["horsesids"];
-    var jhorsesids = "0";
-    
+    var jhorsesids = "0";   
 
     var playerData = server.GetUserData(
     {
@@ -103,7 +102,7 @@ handlers.getPlayerDataExt = function (args) {
             jhorsesids = horsesidsaux.Value;
             
         }
-    }
+    }   
 
     return {
         horsesids: jhorsesids,
@@ -115,6 +114,41 @@ handlers.getPlayerDataExt = function (args) {
         seconds: now.getSeconds()
         
     };
+}
+
+handlers.getHorseData = function (args) {
+
+    var horseid = args.horseid;
+    var keysPlayerData = ["horseid_" + horseid.toString(), "horseitems_" + horseid.toString()];
+    var lhorsedata = "0";
+    var lhorseitems = "0";
+    var playerData = server.GetUserData(
+   {
+       PlayFabId: currentPlayerId,
+       Keys: keysPlayerData
+   });
+
+    if (playerData.Data) {
+
+        if (playerData.Data["horseid_" + horseid.toString()]) {
+            var horsesdatasaux = playerData.Data["horseid_" + horseid.toString()];
+            lhorsedata = horsesdatasaux.Value;
+
+        }
+        if (playerData.Data["horseitems_" + horseid.toString()]) {
+            var horsesitemsaux = playerData.Data["horseitems_" + horseid.toString()];
+            lhorseitems = horsesitemsaux.Value;
+
+        }
+    }
+
+    return {
+
+        horsedata: lhorsedata,
+        horseitems:lhorseitems
+       
+    };
+
 }
 handlers.buyHorse = function (args) {
 
@@ -151,7 +185,13 @@ handlers.buyHorse = function (args) {
             playerCoins: playerCash.playerCoins.toString(),
             coinsPrice: horsedata.coinsPrice.toString(),
             playerGem: playerCash.playerGem.toString(),
-            gemsPrice: horsedata.gemsPrice.toString()
+            gemsPrice: horsedata.gemsPrice.toString(),
+            year: now.getFullYear(),
+            month: now.getMonth(),
+            day: now.getDate(),
+            hours: now.getHours(),
+            minuts: now.getMinutes(),
+            seconds: now.getSeconds()
         }
     }
     if (horsedata.gemsPrice > playerCash.playerGem) {
@@ -160,7 +200,13 @@ handlers.buyHorse = function (args) {
             playerCoins: playerCash.playerCoins.toString(),
             coinsPrice: horsedata.coinsPrice.toString(),
             playerGem: playerCash.playerGem.toString(),
-            gemsPrice: horsedata.gemsPrice.toString()
+            gemsPrice: horsedata.gemsPrice.toString(),
+            year: now.getFullYear(),
+            month: now.getMonth(),
+            day: now.getDate(),
+            hours: now.getHours(),
+            minuts: now.getMinutes(),
+            seconds: now.getSeconds()
         }
     }
         
@@ -171,7 +217,14 @@ handlers.buyHorse = function (args) {
         {
             return {
 
-                ret: -3
+                ret: "-3",
+                year: now.getFullYear(),
+                month: now.getMonth(),
+                day: now.getDate(),
+                hours: now.getHours(),
+                minuts: now.getMinutes(),
+                seconds: now.getSeconds()
+
             }
         }
     }
@@ -214,7 +267,19 @@ handlers.buyHorse = function (args) {
 
     return {
 
-        ret:1
+        ret: "1",
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        day: now.getDate(),
+        hours: now.getHours(),
+        minuts: now.getMinutes(),
+        seconds: now.getSeconds(),
+        year: now.getFullYear(),
+        month: now.getMonth(),
+        day: now.getDate(),
+        hours: now.getHours(),
+        minuts: now.getMinutes(),
+        seconds: now.getSeconds()
     }
     
 
