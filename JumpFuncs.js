@@ -164,7 +164,8 @@ handlers.buyHorse = function (args) {
         }
     }
         
-    for (var idaux in jhorsesids) {
+    for (var i in jhorsesids) {
+        var idaux = jhorsesids[i];
         // cavalo já pertenco ao player
         if(idaux == horsedata.id)
         {
@@ -376,10 +377,11 @@ function GetHorseIdsString(aIds) {
        
     var cont = 0;
     var strret;
-    for (var id in aIds) {
+    for (var i in aIds) {
 
+        var id = aIds[i];
         if (cont == 0) {
-            strret = "xx" + id;
+            strret = id;
         }
         else {
             strret += ",";
@@ -388,7 +390,7 @@ function GetHorseIdsString(aIds) {
         cont++;
     }
 
-    return "1," + strret.toString() + "," + aIds.length.toString();//strret;
+    return strret;
 }
 
 function GetHorseItemFromString(str) {
@@ -404,8 +406,9 @@ function GetHorseItemString(aItems) {
     arItems = aItems;
     var cont = 0;
     var strret;
-    for (var itemId in arItems) {
+    for (var i in arItems) {
 
+        var itemId = arItems[i];
         if (cont == 0) {
             strret = itemId;           
         }
