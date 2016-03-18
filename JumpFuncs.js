@@ -390,7 +390,7 @@ function GetHorseIdsString(aIds) {
         cont++;
     }
 
-    return strret;
+    return "1,2";//strret;
 }
 
 function GetHorseItemFromString(str) {
