@@ -187,12 +187,12 @@ handlers.buyHorse = function (args) {
             coinsPrice: horsedata.coinsPrice.toString(),
             playerGem: playerCash.playerGem.toString(),
             gemsPrice: horsedata.gemsPrice.toString(),
-            year: now.getFullYear(),
-            month: now.getMonth(),
-            day: now.getDate(),
-            hours: now.getHours(),
-            minuts: now.getMinutes(),
-            seconds: now.getSeconds()
+            year: now.getFullYear().toString(),
+            month: now.getMonth().toString(),
+            day: now.getDate().toString(),
+            hours: now.getHours().toString(),
+            minuts: now.getMinutes().toString(),
+            seconds: now.getSeconds().toString()
         }
     }
     if (horsedata.gemsPrice > playerCash.playerGem) {
@@ -202,12 +202,12 @@ handlers.buyHorse = function (args) {
             coinsPrice: horsedata.coinsPrice.toString(),
             playerGem: playerCash.playerGem.toString(),
             gemsPrice: horsedata.gemsPrice.toString(),
-            year: now.getFullYear(),
-            month: now.getMonth(),
-            day: now.getDate(),
-            hours: now.getHours(),
-            minuts: now.getMinutes(),
-            seconds: now.getSeconds()
+            year: now.getFullYear().toString(),
+            month: now.getMonth().toString(),
+            day: now.getDate().toString(),
+            hours: now.getHours().toString(),
+            minuts: now.getMinutes().toString(),
+            seconds: now.getSeconds().toString()
         }
     }
         
@@ -219,12 +219,12 @@ handlers.buyHorse = function (args) {
             return {
 
                 ret: "-3",
-                year: now.getFullYear(),
-                month: now.getMonth(),
-                day: now.getDate(),
-                hours: now.getHours(),
-                minuts: now.getMinutes(),
-                seconds: now.getSeconds()
+                year: now.getFullYear().toString(),
+                month: now.getMonth().toString(),
+                day: now.getDate().toString(),
+                hours: now.getHours().toString(),
+                minuts: now.getMinutes().toString(),
+                seconds: now.getSeconds().toString()
 
             }
         }
@@ -269,18 +269,12 @@ handlers.buyHorse = function (args) {
     return {
 
         ret: "1",
-        year: now.getFullYear(),
-        month: now.getMonth(),
-        day: now.getDate(),
-        hours: now.getHours(),
-        minuts: now.getMinutes(),
-        seconds: now.getSeconds(),
-        year: now.getFullYear(),
-        month: now.getMonth(),
-        day: now.getDate(),
-        hours: now.getHours(),
-        minuts: now.getMinutes(),
-        seconds: now.getSeconds()
+        year: now.getFullYear().toString(),
+        month: now.getMonth().toString(),
+        day: now.getDate().toString(),
+        hours: now.getHours().toString(),
+        minuts: now.getMinutes().toString(),
+        seconds: now.getSeconds().toString()
     }
     
 
