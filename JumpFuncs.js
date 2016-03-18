@@ -185,7 +185,7 @@ handlers.buyHorse = function (args) {
     jhorsesnum++;
     dataux["horsesnum"] = jhorsesnum.toString();
     dataux["horsesids"] = GetHorseIdsString(jhorsesids);
-
+    
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
@@ -199,7 +199,7 @@ handlers.buyHorse = function (args) {
 
      }
     )
-    log.info("log gemsPrice " + horsedata.gemsPrice.toString());
+    log.info("log gemsPrice " + horsedata.gemsPrice.toString() + " " + dataux["horsesids"]);
     if (horsedata.gemsPrice > 0) {
         var playerCurrency = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
@@ -389,6 +389,8 @@ function GetHorseIdsString(aIds) {
         }
         cont++;
     }
+
+    return strret;
 }
 
 function GetHorseItemFromString(str) {
