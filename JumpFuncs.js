@@ -331,24 +331,25 @@ function GetHorseDataFromString(aStr) {
         "idStalion" : sts[3],
         "group": sts[4],
         "race": sts[5],
-        "impulse": sts[6],
-        "stamina": sts[7],
-        "mindfulness": sts[8],
-        "genetics": sts[9],
-        "confidence": sts[10],
-        "condition": sts[11],
-        "coinsPrice": sts[12],
-        "gemsPrice": sts[13],      
+        "gender": sts[6],
+        "impulse": sts[7],
+        "stamina": sts[8],
+        "mindfulness": sts[9],
+        "genetics": sts[10],
+        "confidence": sts[11],
+        "condition": sts[12],
+        "coinsPrice": sts[13],
+        "gemsPrice": sts[14],      
         "breedDate": new Date(),
         "ateDate": new Date(),
         "grooDate": new Date(),
-        "idDet_Main": sts[32],
-        "idDet_Head": sts[33],
-        "idDet_Leg": sts[34],
-        "crinar": sts[35],
-        "crinag": sts[36],
-        "crinab": sts[37],
-        "crinaa": sts[38],
+        "idDet_Main": sts[33],
+        "idDet_Head": sts[34],
+        "idDet_Leg": sts[35],
+        "crinar": sts[36],
+        "crinag": sts[37],
+        "crinab": sts[38],
+        "crinaa": sts[39],
     
     }  
   
@@ -384,7 +385,8 @@ function GetHorseString(aHorse) {
     str += horsedata["idMare"]+ ",";
     str += horsedata["idStalion"]+ ",";
     str += horsedata["group"]+ ",";
-    str += horsedata["race"]+ ",";
+    str += horsedata["race"] + ",";
+    str += horsedata["gender"] + ",";
     str += horsedata["impulse"]+ ",";
     str += horsedata["stamina"]+ ",";
     str += horsedata["mindfulness"]+ ",";
