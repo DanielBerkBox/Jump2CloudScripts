@@ -106,12 +106,12 @@ handlers.getPlayerDataExt = function (args) {
 
     return {
         horsesids: jhorsesids,
-        year: now.getFullYear(),
-        month: now.getMonth(),
-        day: now.getDate(),
-        hours: now.getHours(),
-        minuts: now.getMinutes(),
-        seconds: now.getSeconds()
+        year: now.getFullYear().toString(),
+        month: now.getMonth().toString(),
+        day: now.getDate().toString(),
+        hours: now.getHours().toString(),
+        minuts: now.getMinutes().toString(),
+        seconds: now.getSeconds().toString()
         
     };
 }
