@@ -1,4 +1,21 @@
 // JavaScript source code
+var MIN_ATTR = 50;
+var MAX_ATTR = 100;
+var GROOMIN_LOSE = 2;
+var GROOMIN_INC = 2;
+var FOOD_LOSE = 2;
+var FOOD_INC_1 = 3;
+var FOOD_INC_2 = 5;
+var FOOD_INC_3 = 7;
+var FOOD_COINS_2 = 20;
+var FOOD_GEM_2 = 0;
+var FOOD_COINS_3 = 30;
+var FOOD_GEM_3 = 1;
+var COND_LIMIT_MIN = 75;
+var COND_LIMIT1 = 80;
+var COND_LIMIT2 = 85;
+var COND_LIMIT3 = 90;
+
 
 handlers.getPlayerData = function (args) {
 
@@ -152,135 +169,287 @@ handlers.getHorseData = function (args) {
 }
 handlers.buyHorse = function (args) {
 
+    return DoBuy(args);    
+
+}
+
+handlers.grooming = function(args) 
+{
+    var horseid = args.horseid;
     var now = new Date();
-    var strhorse = args.strhorse;
-    var stritem = args.stritem;
-    var horsedata = GetHorseDataFromString(strhorse);
-    var playerCash = GetPlayerCurrency();
-    var keysPlayerData = ["horsesnum","horsesids"];
-    var jhorsesnum = 0;
-    var jhorsesids = [];
+    var keysPlayerData = ["horseid_" + horseid.toString()];
+    var lhorsedataStr = "0";
 
-   var playerData = server.GetUserData(
-   {
-       PlayFabId: currentPlayerId,
-       Keys: keysPlayerData
-   });
-   if (playerData.Data) {
-
-       if (playerData.Data["horsesnum"]) {
-           var horsesaux = playerData.Data["horsesnum"];
-           jhorsesnum = parseInt(horsesaux.Value);
-       }
-       if (playerData.Data["horsesids"]) {
-           var horsesidsaux = playerData.Data["horsesids"];
-           var straux = horsesidsaux.Value;
-           jhorsesids = GetHorseIdsFromString(straux);
-       }
-   }
-
-    if(horsedata.coinsPrice > playerCash.playerCoins)
+    var playerData = server.GetUserData(
     {
+      PlayFabId: currentPlayerId,
+      Keys: keysPlayerData
+    });
+    if (playerData.Data) {
+
+        if (playerData.Data["horseid_" + horseid.toString()]) {
+            var horsesdatasaux = playerData.Data["horseid_" + horseid.toString()];
+            lhorsedataStr = horsesdatasaux.Value;
+        }
+       
+    }
+
+    if (lhorsedataStr == "0") {
         return {
+
             ret: "-1",
-            playerCoins: playerCash.playerCoins.toString(),
-            coinsPrice: horsedata.coinsPrice.toString(),
-            playerGem: playerCash.playerGem.toString(),
-            gemsPrice: horsedata.gemsPrice.toString(),
-            year: now.getFullYear().toString(),
-            month: now.getMonth().toString(),
-            day: now.getDate().toString(),
-            hours: now.getHours().toString(),
-            minuts: now.getMinutes().toString(),
-            seconds: now.getSeconds().toString()
-        }
-    }
-    if (horsedata.gemsPrice > playerCash.playerGem) {
-        return {
-            ret: "-2",
-            playerCoins: playerCash.playerCoins.toString(),
-            coinsPrice: horsedata.coinsPrice.toString(),
-            playerGem: playerCash.playerGem.toString(),
-            gemsPrice: horsedata.gemsPrice.toString(),
-            year: now.getFullYear().toString(),
-            month: now.getMonth().toString(),
-            day: now.getDate().toString(),
-            hours: now.getHours().toString(),
-            minuts: now.getMinutes().toString(),
-            seconds: now.getSeconds().toString()
-        }
-    }
-        
-    for (var i in jhorsesids) {
-        var idaux = jhorsesids[i];
-        // cavalo já pertenco ao player
-        if(idaux == horsedata.id)
-        {
-            return {
-
-                ret: "-3",
-                year: now.getFullYear().toString(),
-                month: now.getMonth().toString(),
-                day: now.getDate().toString(),
-                hours: now.getHours().toString(),
-                minuts: now.getMinutes().toString(),
-                seconds: now.getSeconds().toString()
-
-            }
+            horsedata:""
         }
     }
 
-    jhorsesids.push(horsedata.id);
+    var lhorsedata = GetHorseDataFromString(lhorsedataStr);
+    var daysdif = DaysBetween(lhorsedata.grooDate, now);
+    // primeira vez.
+    if (daysdif > 9999)
+        daysdif = 1;
+
+    if (daysdif <= 0) {
+
+        return { ret: "-4", coins: "0", gems: "0", horsedata: "" }
+    }
+
+    var lattr = lhorsedata.confidence - (daysdif * GROOMIN_LOSE) + GROOMIN_INC;
+    
+    if (lattr < MIN_ATTR)
+        lattr = MIN_ATTR;
+    if (lattr > MAX_ATTR)
+        lattr = MAX_ATTR;
+
+    lhorsedata.grooDate = now;
+    lhorsedata.confidence = lattr;
 
     var dataux = {};
-    var keyaux = "horseid_" + horsedata.id;    
-    dataux[keyaux] = strhorse;
-    keyaux = "horseitems_" + horsedata.id;
-    dataux[keyaux] = stritem;
-    jhorsesnum++;
-    dataux["horsesnum"] = jhorsesnum.toString();
-    dataux["horsesids"] = GetHorseIdsString(jhorsesids);
-    
+    var keyaux = "horseid_" + lhorsedata.id;
+    lhorsedataStr = GetHorseString(lhorsedata);
+    dataux[keyaux] = lhorsedataStr;
+
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
         "Data": dataux,
         "Permission": "Public"
     });
-    var playerCurrency = server.SubtractUserVirtualCurrency({
-        PlayFabId: currentPlayerId,
-        VirtualCurrency: "GO",
-        Amount: horsedata.coinsPrice
-
-     }
-    )
-    log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + "| " + dataux["horsesids"] + " | " + jhorsesids.length.toString());
-    if (horsedata.gemsPrice > 0) {
-        var playerCurrency = server.SubtractUserVirtualCurrency({
-            PlayFabId: currentPlayerId,
-            VirtualCurrency: "GE",
-            Amount: horsedata.gemsPrice
-
-        }
-       )
-    }
-
 
     return {
 
         ret: "1",
+        horsedata: lhorsedataStr,
         year: now.getFullYear().toString(),
         month: now.getMonth().toString(),
         day: now.getDate().toString(),
         hours: now.getHours().toString(),
         minuts: now.getMinutes().toString(),
         seconds: now.getSeconds().toString()
+
     }
-    
 
 
 }
-function GetPlayerCurrency() 
+
+handlers.feeding = function (args) {
+    var horseid = args.horseid;
+    var now = new Date();
+    var keysPlayerData = ["horseid_" + horseid.toString()];
+    var lhorsedataStr = "0";
+    var lfoodinc = FOOD_INC_1;
+    var lfoodcoins = 0;
+    var lfoodgem = 0;
+
+    var lcondmax = COND_LIMIT1;
+
+
+    if (args.food == 2) {
+        lfoodinc = FOOD_INC_2;
+        lfoodcoins = FOOD_COINS_2;
+        lfoodgem = FOOD_GEM_2;
+        lcondmax = COND_LIMIT2;
+    }
+    if (args.food == 3) {
+        lfoodinc = FOOD_INC_3;
+        lfoodcoins = FOOD_COINS_2;
+        lfoodgem = FOOD_GEM_3;
+        lcondmax = COND_LIMIT3;
+    }
+
+
+    var playerData = server.GetUserData(
+    {
+        PlayFabId: currentPlayerId,
+        Keys: keysPlayerData
+    });
+    if (playerData.Data) {
+
+        if (playerData.Data["horseid_" + horseid.toString()]) {
+            var horsesdatasaux = playerData.Data["horseid_" + horseid.toString()];
+            lhorsedataStr = horsesdatasaux.Value;
+        }
+
+    }
+
+    if (lhorsedataStr == "0") {
+        return {
+
+            ret: "-1",
+            coins: "",
+            gems:"",
+            horsedata: ""
+        }
+    }
+      
+    var lhorsedata = GetHorseDataFromString(lhorsedataStr);
+    var daysdif = DaysBetween(lhorsedata.ateDate, now);
+    // primeira vez.
+    if (daysdif > 9999)
+        daysdif = 1;
+
+    if (daysdif <= 0) {
+
+        return { ret: "-4", coins: "0", gems: "0", horsedata:""}
+    }
+    var lattr = lhorsedata.condition - (daysdif * FOOD_LOSE) + lfoodinc;
+    
+    if (lattr < COND_LIMIT_MIN)
+        lattr = COND_LIMIT_MIN;
+    if (lattr > lcondmax)
+        lattr = lcondmax;
+
+    lhorsedata.ateDate = now;
+    lhorsedata.condition = lattr;
+
+    var dataux = {};
+    var keyaux = "horseid_" + lhorsedata.id;
+    lhorsedataStr = GetHorseString(lhorsedata);
+    dataux[keyaux] = lhorsedataStr;
+
+    var playerCash = GetPlayerCurrency();
+
+    if (lfoodcoins > 0) {
+        
+        if (lfoodcoins > playerCash.playerCoins) {
+
+            return { ret: "-3", coins: playerCash.playerCoins.toString(), gems: playerCash.playerGem.toString(), horsedata:""}
+        }
+
+        var playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GO",
+            Amount: lfoodcoins
+
+        }
+        );
+        playerCash.playerCoins = playerCurrency.Balance;       
+
+    }
+
+    if (lfoodgem > 0) {
+
+        if (lfoodgem > playerCash.playerGem) {
+
+            return { ret: "-2", coins: playerCash.playerCoins.toString(), gems: playerCash.playerGem.toString(), horsedata:"0" }
+        }
+        var playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: lfoodgem
+
+        }
+       );
+        playerCash.playerGem = playerCurrency.Balance;
+       
+    }
+    server.UpdateUserData({
+
+        PlayFabId: currentPlayerId,
+        "Data": dataux,
+        "Permission": "Public"
+    });
+
+    return {
+
+        ret: "1",
+        coins: playerCash.playerCoins.toString(),
+        gems: playerCash.playerGem.toString(),
+        horsedata: lhorsedataStr,
+        year: now.getFullYear().toString(),
+        month: now.getMonth().toString(),
+        day: now.getDate().toString(),
+        hours: now.getHours().toString(),
+        minuts: now.getMinutes().toString(),
+        seconds: now.getSeconds().toString()
+
+    }
+
+
+}
+
+handlers.breeding = function (args) 
+{
+    var marestr = args.marestr;
+    var stallionstr = args.stallionstr;
+    var lname = args.name;
+    var lcoins = args.coins;
+    var lgems = args.gems;
+    
+    var keysPlayerData = ["horseid_" + lidMare.toString(), "horseid_" + lidStallion.toString(), "breedid", "horsesnum"];    
+    var lbreedid = "1000";
+    var jhorsesnum = 0;   
+
+    var playerData = server.GetUserData(
+   {
+       PlayFabId: currentPlayerId,
+       Keys: keysPlayerData
+   });
+    if (playerData.Data) {
+               
+        if (playerData.Data["horsesnum"]) {
+            var horsesnumaux = playerData.Data["horsesnum"];
+            jhorsesnum = parseInt(horsesnumaux.Value);
+        }
+        if (playerData.Data["breedid"]) {
+            var lbaux = playerData.Data["breedid"];
+            lbreedid = lbaux.Value;
+            var lbreedidInt = parseInt(lbreedid);
+            lbreedidInt = lbreedidInt + 1;
+            lbreedid = lbreedidInt.toString();
+
+        }
+        
+
+    }
+    var lhorsedataStallion = GetHorseDataFromString(stallionstr);
+    var lhorsedataMare = GetHorseDataFromString(marestr);
+    if ((lhorsedataStallion.id == "0") || (lhorsedataMare.id == "0")) {
+
+        return {
+            ret: "-3",
+            horsedata: "0",
+            playercoins: "0",
+            playergems: "0"
+        }
+    }
+
+    var breeddata = DoBreed(marestr, stallionstr);
+    breeddata.id = lbreedid;
+    breeddata.coinsPrice = lcoins;
+    breeddata.gemsPrice = lgems;
+    breeddata.name = lname;
+    var argbuy = {};
+    argbuy["strhorse"] = GetHorseString(breeddata);
+    argbuy["stritem"] = "0";
+
+    var retbuy = DoBuy(argbuy);
+    argbuy["horsedata"] = argbuy["strhorse"];
+
+    return argbuy;
+
+}
+
+function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
     var lplayerGem = 0;
@@ -344,7 +513,8 @@ function GetHorseDataFromString(aStr) {
         "crinar": sts[36],
         "crinag": sts[37],
         "crinab": sts[38],
-        "crinaa": sts[39],
+        "crinaa": sts[39]
+        
     
     }  
   
@@ -364,6 +534,7 @@ function GetHorseDataFromString(aStr) {
      d.setHours(parseInt(sts[29]), parseInt(sts[30]), parseInt(sts[31]));
     //horseData["breedDate"] = d;
      horseData.grooDate = d;
+        
 
 
     return horseData;
@@ -424,6 +595,7 @@ function GetHorseString(aHorse) {
     str += horsedata["crinab"] + ",";
     str += horsedata["crinaa"];
   
+   
     return str;
 
 }
@@ -481,4 +653,229 @@ function GetHorseItemString(aItems) {
         }
         cont++;
     }
+}
+
+function DaysBetween  (date1, date2) {
+    //Get 1 day in milliseconds
+    var one_day = 1000 * 60 * 60 * 24;
+
+    // Convert both dates to milliseconds
+    var date1_ms = date1.getTime();
+    var date2_ms = date2.getTime();
+
+    // Calculate the difference in milliseconds
+    var difference_ms = date2_ms - date1_ms;
+
+    // Convert back to days and return
+    return Math.round(difference_ms / one_day);
+}
+
+function DoBuy(args) {
+
+    var now = new Date();
+    var strhorse = args.strhorse;
+    var stritem = args.stritem;
+    var horsedata = GetHorseDataFromString(strhorse);
+    var playerCash = GetPlayerCurrency();
+    var keysPlayerData = ["horsesnum", "horsesids"];
+    var jhorsesnum = 0;
+    var jhorsesids = [];
+
+    var playerData = server.GetUserData(
+    {
+        PlayFabId: currentPlayerId,
+        Keys: keysPlayerData
+    });
+    if (playerData.Data) {
+
+        if (playerData.Data["horsesnum"]) {
+            var horsesaux = playerData.Data["horsesnum"];
+            jhorsesnum = parseInt(horsesaux.Value);
+        }
+        if (playerData.Data["horsesids"]) {
+            var horsesidsaux = playerData.Data["horsesids"];
+            var straux = horsesidsaux.Value;
+            jhorsesids = GetHorseIdsFromString(straux);
+        }
+    }
+
+    if (parseInt(horsedata.coinsPrice) > playerCash.playerCoins) {
+        return {
+            ret: "-1",
+            playerCoins: playerCash.playerCoins.toString(),
+            coinsPrice: horsedata.coinsPrice.toString(),
+            playerGem: playerCash.playerGem.toString(),
+            gemsPrice: horsedata.gemsPrice.toString(),
+            year: now.getFullYear().toString(),
+            month: now.getMonth().toString(),
+            day: now.getDate().toString(),
+            hours: now.getHours().toString(),
+            minuts: now.getMinutes().toString(),
+            seconds: now.getSeconds().toString()
+        }
+    }
+    if (parseInt(horsedata.gemsPrice) > playerCash.playerGem) {
+        return {
+            ret: "-2",
+            playerCoins: playerCash.playerCoins.toString(),
+            coinsPrice: horsedata.coinsPrice.toString(),
+            playerGem: playerCash.playerGem.toString(),
+            gemsPrice: horsedata.gemsPrice.toString(),
+            year: now.getFullYear().toString(),
+            month: now.getMonth().toString(),
+            day: now.getDate().toString(),
+            hours: now.getHours().toString(),
+            minuts: now.getMinutes().toString(),
+            seconds: now.getSeconds().toString()
+        }
+    }
+
+    for (var i in jhorsesids) {
+        var idaux = jhorsesids[i];
+        // cavalo já pertenco ao player
+        if (idaux == horsedata.id) {
+            return {
+
+                ret: "-3",
+                year: now.getFullYear().toString(),
+                month: now.getMonth().toString(),
+                day: now.getDate().toString(),
+                hours: now.getHours().toString(),
+                minuts: now.getMinutes().toString(),
+                seconds: now.getSeconds().toString()
+
+            }
+        }
+    }
+
+    jhorsesids.push(horsedata.id);
+
+    var dataux = {};
+    var keyaux = "horseid_" + horsedata.id;
+    dataux[keyaux] = strhorse;
+    keyaux = "horseitems_" + horsedata.id;
+    dataux[keyaux] = stritem;
+    jhorsesnum++;
+    dataux["horsesnum"] = jhorsesnum.toString();
+    dataux["horsesids"] = GetHorseIdsString(jhorsesids);
+
+    server.UpdateUserData({
+
+        PlayFabId: currentPlayerId,
+        "Data": dataux,
+        "Permission": "Public"
+    });
+    var playerCurrency = server.SubtractUserVirtualCurrency({
+        PlayFabId: currentPlayerId,
+        VirtualCurrency: "GO",
+        Amount: horsedata.coinsPrice
+
+    }
+    );
+    log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + "| " + dataux["horsesids"] + " | " + jhorsesids.length.toString());
+    if (horsedata.gemsPrice > 0) {
+        var playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: horsedata.gemsPrice
+
+        }
+       );
+    }
+
+
+    return {
+
+        ret: "1",
+        year: now.getFullYear().toString(),
+        month: now.getMonth().toString(),
+        day: now.getDate().toString(),
+        hours: now.getHours().toString(),
+        minuts: now.getMinutes().toString(),
+        seconds: now.getSeconds().toString()
+    }
+
+
+
+}
+
+function DoBreed(marestr,stallionstr) 
+{
+    var maredata = GetHorseDataFromString(marestr);
+    var stalliondata = GetHorseDataFromString(stallionstr);
+    var breeddata = GetHorseDataFromString(marestr);
+    var lcoins = parseInt(maredata.coinsPrice);
+    var lgems = parseInt(maredata.gemsPrice);
+    var rnd = 0;
+    var attrrnd = 0;
+
+    // preco do breed sera igual ao maior valor entre mare e stallion.
+    /*if (parseInt(stalliondata.coinsPrice) > lcoins)
+        lcoins = stalliondata.coinsPrice;
+    if (parseInt(stalliondata.gemsPrice) > lgems)
+        lgems = stalliondata.gemsPrice;*/
+
+    breeddata.coinsPrice = lcoins.toString();
+    breeddata.gemsPrice = lgems.toString();
+
+    breeddata.idMare = maredata.id;
+    breeddata.idStalion = stalliondata.id;
+
+    breeddata.stamina = GetAttrValue("stamina", stalliondata, maredata).toString();
+    breeddata.impulse = GetAttrValue("impulse", stalliondata, maredata).toString();
+    breeddata.mindfulness = GetAttrValue("mindfulness", stalliondata, maredata).toString();
+    breeddata.genetics = GetAttrValue("genetics", stalliondata, maredata).toString();
+
+    rnd = Math.floor((Math.random() * 3) + 1) - 1;
+    breeddata.idDet_Leg = rnd.toString();
+    rnd = Math.floor((Math.random() * 2) + 1) - 1;
+    breeddata.idDet_Head = rnd.toString();
+
+    rnd = Math.floor((Math.random() * 10) + 1);
+    if (stalliondata.genetics > maredata.genetics) {
+        breeddata.crinaa = stalliondata.crinaa;
+        breeddata.crinab = stalliondata.crinab;
+        breeddata.crinag = stalliondata.crinag;
+        breeddata.crinar = stalliondata.crinar;
+        }
+
+    rnd = Math.floor((Math.random() * 9) + 1);
+    breeddata.idDet_Main = "0" + rnd.toString();    
+    rnd = Math.floor((Math.random() * 2) + 1);
+    breeddata.gender = rnd.toString();
+
+    breeddata.breedDate = new Date();
+    return breeddata;
+    
+}
+
+function GetAttrValue(aAttr, aStallion, aMare) {
+
+    var rnd = 0;
+    var attrrnd = 0;
+    var ret = 0;
+    var vaux = -4;
+    var mareorstallion = 5;
+
+    if (aStallion.genetics > aMare.genetics)
+        mareorstallion = 4;
+    if (aMare.genetics > aStallion.genetics)
+        mareorstallion = 6;
+
+    rnd = Math.floor((Math.random() * 100) + 1);
+    if (rnd < aStallion.genetics)
+        vaux = vaux + 1;
+
+    rnd = Math.floor((Math.random() * 100) + 1);
+    if (rnd < aMare.genetics)
+        vaux = vaux + 1;
+
+    rnd = Math.floor((Math.random() * 10) + 1);
+    attrrnd = Math.floor((Math.random() * 6) + 1) - vaux;
+    if (rnd >= mareorstallion)
+        ret = stalliondata[aAttr] + attrrnd;
+    else
+        ret = maredata[aAttr] + attrrnd;
+
+    return ret;
 }
