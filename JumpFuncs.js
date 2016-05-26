@@ -449,6 +449,114 @@ handlers.breeding = function (args)
 
 }
 
+handlers.buyitem = function (args) {
+
+    var itemid = args.itemid;
+    var horseid = args.horseid;
+    var itemcoins = args.itemcoins;
+    var itemgems = args.itemgems;
+    var playerCash = GetPlayerCurrency();
+    var keysPlayerData = ["horseid_" + horseid.toString(), "horseitems_" + horseid.toString()];
+
+    var lhorsedata = "0";
+    var lhorseitems = "0";
+    var itemsList = [];
+    var playerData = server.GetUserData(
+   {
+       PlayFabId: currentPlayerId,
+       Keys: keysPlayerData
+   });
+
+    if (playerData.Data) {
+
+        if (playerData.Data["horseid_" + horseid.toString()]) {
+            var horsesdatasaux = playerData.Data["horseid_" + horseid.toString()];
+            lhorsedata = horsesdatasaux.Value;
+
+        }
+        if (playerData.Data["horseitems_" + horseid.toString()]) {
+            var horsesitemsaux = playerData.Data["horseitems_" + horseid.toString()];
+            lhorseitems = horsesitemsaux.Value;
+
+        }
+    }
+    if (lhorsedata == "0") {
+        return {
+            ret: "-1",
+            msg: "Horse not found"
+        }
+    }
+    if(lhorseitems != "0")
+        itemsList = GetHorseItemFromString(lhorseitems);
+
+    for (var i in itemsList) {
+        var itaux = itemsList[i];
+        if(itaux == itemid) // horse ja tem o item
+        {
+            return {
+                ret: "-2",
+                msg: "Horse already has the item."
+            }
+        }
+    }
+
+    itemsList.push(itemid);
+    if (parseInt(itemcoins) > playerCash.playerCoins) {
+        return {
+
+            ret: "-3",
+            msg: "You do not have enough coins."
+        }
+    }
+    if (parseInt(itemgems) > playerCash.playerGem) {
+        return {
+
+            ret: "-3",
+            msg: "You do not have enough gems."
+        }
+    }
+    lhorseitems = GetHorseItemString(itemsList);
+
+    var dataux = {};
+  
+
+    keyaux = "horseitems_" + horseid
+    dataux[keyaux] = lhorseitems;  
+
+    server.UpdateUserData({
+
+        PlayFabId: currentPlayerId,
+        "Data": dataux,
+        "Permission": "Public"
+    });
+    var playerCurrency = server.SubtractUserVirtualCurrency({
+        PlayFabId: currentPlayerId,
+        VirtualCurrency: "GO",
+        Amount: parseInt(itemcoins)
+
+    }
+    );
+    
+    if (parseInt(itemgems) > 0) {
+        var playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: parseInt(itemgems)
+
+        }
+       );
+    }
+    
+    return {
+
+        ret: "1",
+        horseid: horseid,
+        itemid: itemid
+    }    
+
+
+}
+
 function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
