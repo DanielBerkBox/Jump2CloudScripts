@@ -481,8 +481,7 @@ handlers.buyitem = function (args) {
         }
     }
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
-    //teste
-    return { ret:"-5" }
+    
     if (lhorsedata == "0") {
         return {
             ret: "-1",
@@ -504,6 +503,9 @@ handlers.buyitem = function (args) {
     }
 
     itemsList.push(itemid);
+
+    //teste
+    return { ret: "-5" }
     if (parseInt(itemcoins) > playerCash.playerCoins) {
         return {
 
