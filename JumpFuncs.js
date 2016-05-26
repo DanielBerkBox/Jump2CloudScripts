@@ -520,6 +520,7 @@ handlers.buyitem = function (args) {
         }
     }
     lhorseitems = GetHorseItemString(itemsList);
+    log.info(" LOG 2  ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
 
     var dataux = {};
   
@@ -527,7 +528,8 @@ handlers.buyitem = function (args) {
     keyaux = "horseitems_" + horseid
     dataux[keyaux] = lhorseitems;  
 
-   
+    //teste
+    return { ret: "-5" , horsesitems:lhorseitems }
 
     server.UpdateUserData({
 
@@ -536,8 +538,7 @@ handlers.buyitem = function (args) {
         "Permission": "Public"
     });
 
-    //teste
-    return { ret: "-5" }
+   
 
     var playerCurrency = server.SubtractUserVirtualCurrency({
         PlayFabId: currentPlayerId,
