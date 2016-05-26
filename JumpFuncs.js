@@ -529,16 +529,14 @@ handlers.buyitem = function (args) {
     dataux[keyaux] = lhorseitems;  
 
     //teste
-    return { ret: "-5" , horsesitems:lhorseitems }
+    //return { ret: "-5" , horsesitems:lhorseitems }
 
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
         "Data": dataux,
         "Permission": "Public"
-    });
-
-   
+    });   
 
     var playerCurrency = server.SubtractUserVirtualCurrency({
         PlayFabId: currentPlayerId,
@@ -772,6 +770,8 @@ function GetHorseItemString(aItems) {
         }
         cont++;
     }
+
+    return strret;
 }
 
 function DaysBetween  (date1, date2) {
