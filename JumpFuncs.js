@@ -504,8 +504,7 @@ handlers.buyitem = function (args) {
 
     itemsList.push(itemid);
 
-    //teste
-    return { ret: "-5" }
+   
     if (parseInt(itemcoins) > playerCash.playerCoins) {
         return {
 
@@ -527,6 +526,9 @@ handlers.buyitem = function (args) {
 
     keyaux = "horseitems_" + horseid
     dataux[keyaux] = lhorseitems;  
+
+    //teste
+    return { ret: "-5" }
 
     server.UpdateUserData({
 
