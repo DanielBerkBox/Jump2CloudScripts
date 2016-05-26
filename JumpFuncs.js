@@ -527,8 +527,7 @@ handlers.buyitem = function (args) {
     keyaux = "horseitems_" + horseid
     dataux[keyaux] = lhorseitems;  
 
-    //teste
-    return { ret: "-5" }
+   
 
     server.UpdateUserData({
 
@@ -536,6 +535,10 @@ handlers.buyitem = function (args) {
         "Data": dataux,
         "Permission": "Public"
     });
+
+    //teste
+    return { ret: "-5" }
+
     var playerCurrency = server.SubtractUserVirtualCurrency({
         PlayFabId: currentPlayerId,
         VirtualCurrency: "GO",
