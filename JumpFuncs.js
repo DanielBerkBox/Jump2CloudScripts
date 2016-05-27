@@ -480,7 +480,7 @@ handlers.buyitem = function (args) {
 
         }
     }
-    log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
+   
     
     if (lhorsedata == "0") {
         return {
@@ -490,7 +490,7 @@ handlers.buyitem = function (args) {
     }
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
-
+    log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
     log.info(" itemsList len: " + itemsList.length.toString());
     for (var i in itemsList) {
         var itaux = itemsList[i];
