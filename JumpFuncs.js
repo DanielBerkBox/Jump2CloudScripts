@@ -492,6 +492,7 @@ handlers.buyitem = function (args) {
     log.info(" ITEMB: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
+    log.info(" itemsList " + itemsList);
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
     log.info(" itemsList len: " + itemsList.length.toString());
     for (var i in itemsList) {
