@@ -747,7 +747,12 @@ function GetHorseIdsString(aIds) {
 
 function GetHorseItemFromString(str) {
 
-    var arraux = aStr.split(",");
+    var arraux = [];
+
+    if (str.length.indexOf(",") < 0) 
+        arraux.push(parseInt(str))
+    else
+        arraux = aStr.split(",");
     return arraux;
     
 }
