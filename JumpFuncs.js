@@ -489,13 +489,12 @@ handlers.buyitem = function (args) {
         }
     }
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
-    log.info(" ITEMB: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
-
+    
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
-    log.info(" itemsList " + itemsList);
+   
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
-    log.info(" itemsList len: " + itemsList.length.toString());
+   
     for (var i in itemsList) {
         var itaux = itemsList[i];
         if(itaux == itemid) // horse ja tem o item
@@ -525,8 +524,7 @@ handlers.buyitem = function (args) {
         }
     }
     lhorseitems = GetHorseItemString(itemsList);
-    log.info(" LOG 2  ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
-
+    
     var dataux = {};
   
 
@@ -749,14 +747,10 @@ function GetHorseIdsString(aIds) {
     return strret;
 }
 
-function GetHorseItemFromString(str) {
+function GetHorseItemFromString(aStr) {
 
-    var arraux = [];
-    log.info(" str : " + str);
-    if (str.length.indexOf(",") < 0) 
-        arraux.push(parseInt(str))
-    else
-        arraux = aStr.split(",");
+    var arraux = [];   
+    arraux = aStr.split(",");
     return arraux;
     
 }
