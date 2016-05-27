@@ -489,7 +489,8 @@ handlers.buyitem = function (args) {
         }
     }
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
-    log.info(" ITEMB: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
+    log.info(" ITEMB: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems);
+
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
     log.info(" itemsList " + itemsList);
@@ -751,7 +752,7 @@ function GetHorseIdsString(aIds) {
 function GetHorseItemFromString(str) {
 
     var arraux = [];
-
+    log.info(" str : " + str);
     if (str.length.indexOf(",") < 0) 
         arraux.push(parseInt(str))
     else
