@@ -491,6 +491,7 @@ handlers.buyitem = function (args) {
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
 
+    log.info(" itemsList len: " + itemsList.length.toString());
     for (var i in itemsList) {
         var itaux = itemsList[i];
         if(itaux == itemid) // horse ja tem o item
@@ -501,9 +502,9 @@ handlers.buyitem = function (args) {
             }
         }
     }
-
+    
     itemsList.push(itemid);
-
+    log.info(" itemsList len 2: " + itemsList.length.toString());
    
     if (parseInt(itemcoins) > playerCash.playerCoins) {
         return {
