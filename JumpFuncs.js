@@ -488,6 +488,8 @@ handlers.buyitem = function (args) {
             msg: "Horse not found"
         }
     }
+    log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
+    log.info(" ITEMB: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
     log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
