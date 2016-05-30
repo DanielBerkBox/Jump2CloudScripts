@@ -11,7 +11,7 @@ var FOOD_COINS_2 = 20;
 var FOOD_GEM_2 = 0;
 var FOOD_COINS_3 = 30;
 var FOOD_GEM_3 = 1;
-var COND_LIMIT_MIN = 75;
+var COND_LIMIT_MIN = 70;
 var COND_LIMIT1 = 80;
 var COND_LIMIT2 = 85;
 var COND_LIMIT3 = 90;
@@ -215,8 +215,8 @@ handlers.grooming = function(args)
 
     var lattr = lhorsedata.confidence - (daysdif * GROOMIN_LOSE) + GROOMIN_INC;
     
-    if (lattr < MIN_ATTR)
-        lattr = MIN_ATTR;
+    if (lattr < COND_LIMIT_MIN)
+        lattr = COND_LIMIT_MIN;
     if (lattr > MAX_ATTR)
         lattr = MAX_ATTR;
 
@@ -303,6 +303,7 @@ handlers.feeding = function (args) {
       
     var lhorsedata = GetHorseDataFromString(lhorsedataStr);
     var daysdif = DaysBetween(lhorsedata.ateDate, now);
+    log.info(" daysdif : " + daysdif.toString());
     // primeira vez.
     if (daysdif > 9999)
         daysdif = 1;
