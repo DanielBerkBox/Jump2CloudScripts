@@ -313,7 +313,8 @@ handlers.feeding = function (args) {
         return { ret: "-4", coins: "0", gems: "0", horsedata:""}
     }
     var lattr = lhorsedata.condition - (daysdif * FOOD_LOSE) + lfoodinc;
-    
+    log.info(" daysdif : " + daysdif.toString() + "lhorsedata.condition " + lhorsedata.condition.toString());
+    log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString());
     if (lattr < COND_LIMIT_MIN)
         lattr = COND_LIMIT_MIN;
     if (lattr > lcondmax)
