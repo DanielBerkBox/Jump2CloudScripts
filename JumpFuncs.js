@@ -642,19 +642,19 @@ function GetHorseDataFromString(aStr) {
     }  
   
      var d = new Date();
-     d.setFullYear(parseInt(sts[14]), parseInt(sts[15]), parseInt(sts[16]));
-     d.setHours(parseInt(sts[17]), parseInt(sts[18]), parseInt(sts[19]));
+     d.setFullYear(parseInt(sts[15]), parseInt(sts[16]), parseInt(sts[17]));
+     d.setHours(parseInt(sts[18]), parseInt(sts[19]), parseInt(sts[20]));
      horseData.breedDate = d;
 
      d = new Date();
-     d.setFullYear(parseInt(sts[20]), parseInt(sts[21]), parseInt(sts[22]));
-     d.setHours(parseInt(sts[23]), parseInt(sts[24]), parseInt(sts[25]));
+     d.setFullYear(parseInt(sts[21]), parseInt(sts[22]), parseInt(sts[23]));
+     d.setHours(parseInt(sts[24]), parseInt(sts[25]), parseInt(sts[26]));
      //horseData["breedDate"] = d;
      horseData.ateDate = d;
 
      d = new Date();
-     d.setFullYear(parseInt(sts[26]), parseInt(sts[27]), parseInt(sts[28]));
-     d.setHours(parseInt(sts[29]), parseInt(sts[30]), parseInt(sts[31]));
+     d.setFullYear(parseInt(sts[27]), parseInt(sts[28]), parseInt(sts[29]));
+     d.setHours(parseInt(sts[30]), parseInt(sts[31]), parseInt(sts[32]));
     //horseData["breedDate"] = d;
      horseData.grooDate = d;
         
