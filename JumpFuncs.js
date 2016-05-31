@@ -303,7 +303,7 @@ handlers.feeding = function (args) {
       
     var lhorsedata = GetHorseDataFromString(lhorsedataStr);
     var daysdif = DaysBetween(lhorsedata.ateDate, now);
-    log.info(" daysdif : " + daysdif.toString());
+    log.info(" daysdif : " + daysdif.toString() + " now:" + now.toDateString() + " ateDate:" + lhorsedata.ateDate.toDateString());
     // primeira vez.
     if (daysdif > 9999)
         daysdif = 1;
@@ -322,6 +322,7 @@ handlers.feeding = function (args) {
 
     lhorsedata.ateDate = now;
     lhorsedata.condition = lattr;
+    log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString() + " ateDate:" + lhorsedata.ateDate.toDateString());
 
     var dataux = {};
     var keyaux = "horseid_" + lhorsedata.id;
