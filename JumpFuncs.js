@@ -94,7 +94,22 @@ handlers.getPlayerData = function (args) {
         color: jcolor,
         wins: jwins,
         held: jheld,
-        horsesnum: jhorsesnum
+        horsesnum: jhorsesnum,
+        aGROOMIN_LOSE: GROOMIN_LOSE,
+        aGROOMIN_INC:  GROOMIN_INC,
+        aFOOD_LOSE: FOOD_LOSE,
+        aFOOD_INC_1: FOOD_INC_1,
+        aFOOD_INC_2: FOOD_INC_2,
+        aFOOD_INC_3: FOOD_INC_3,
+        aFOOD_COINS_2: FOOD_COINS_2,
+        aFOOD_GEM_2: FOOD_GEM_2,
+        aFOOD_COINS_3: FOOD_COINS_3,
+        aFOOD_GEM_3: FOOD_GEM_3,
+        aCOND_LIMIT_MIN: COND_LIMIT_MIN,
+        aCOND_LIMIT1: COND_LIMIT1,
+        aCOND_LIMIT2: COND_LIMIT2,
+        aCOND_LIMIT3: COND_LIMIT3
+   
         
     };
 }
