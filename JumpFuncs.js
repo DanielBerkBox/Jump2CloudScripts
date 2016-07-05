@@ -461,9 +461,9 @@ handlers.breeding = function (args)
     argbuy["stritem"] = "0";
 
     var retbuy = DoBuy(argbuy);
-    argbuy["horsedata"] = argbuy["strhorse"];
+    retbuy["horsedata"] = argbuy["strhorse"];
 
-    return argbuy;
+    return retbuy;
 
 }
 
