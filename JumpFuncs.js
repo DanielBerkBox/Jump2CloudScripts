@@ -463,6 +463,9 @@ handlers.breeding = function (args)
 
     }
     log.info(" HOrse to breed ID: " + lbreedid);
+    log.info(" Mare,stallion ID:" + lidMare.toString() + "," + lidStallion.toString());
+    log.info(" stallion :" + stallionstr);
+    log.info(" mare :" + marestr);
 
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
