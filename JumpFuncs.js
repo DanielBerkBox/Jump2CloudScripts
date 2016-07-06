@@ -418,7 +418,7 @@ handlers.breeding = function (args)
     var marestr ;
     var stallionstr;
 
-    log.info(" HOrse to breed 1 : " + args.name);
+    log.info("  ***** BREEDING *****  : " + args.name);
 
     /*return {
             ret: "-5",
@@ -432,7 +432,7 @@ handlers.breeding = function (args)
     var lbreedid = "1000";
     var jhorsesnum = 0;   
 
-    log.info(" HOrse to breed 2: " + args.name);
+    
     var playerData = server.GetUserData(
    {
        PlayFabId: currentPlayerId,
@@ -462,10 +462,7 @@ handlers.breeding = function (args)
         }
 
     }
-    log.info(" HOrse to breed ID: " + lbreedid);
-    log.info(" Mare,stallion ID:" + lidMare.toString() + "," + lidStallion.toString());
-    log.info(" stallion :" + stallionstr);
-    log.info(" mare :" + marestr);
+  
 
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
