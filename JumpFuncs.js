@@ -420,13 +420,13 @@ handlers.breeding = function (args)
 
     log.info(" HOrse to breed 1 : " + args.name);
 
-    return {
+    /*return {
             ret: "-5",
             horsedata: "0",
             playercoins: "0", 
             playergems: "0"
         }
-    
+    */
 
     var keysPlayerData = ["horseid_" + lidMare.toString(), "horseid_" + lidStallion.toString(), "breedid", "horsesnum"];    
     var lbreedid = "1000";
