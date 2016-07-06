@@ -412,12 +412,23 @@ handlers.breeding = function (args)
     var lname = args.name;
     var lcoins = args.coins;
     var lgems = args.gems;
-    
+
+    log.info(" HOrse to breed 1 : " + args.name);
+    return {
+
+        return {
+            ret: "-5",
+            horsedata: "0",
+            playercoins: "0",
+            playergems: "0"
+        }
+    }
+
     var keysPlayerData = ["horseid_" + lidMare.toString(), "horseid_" + lidStallion.toString(), "breedid", "horsesnum"];    
     var lbreedid = "1000";
     var jhorsesnum = 0;   
 
-    log.info(" HOrse to breed: " + args.name);
+    log.info(" HOrse to breed 2: " + args.name);
     var playerData = server.GetUserData(
    {
        PlayFabId: currentPlayerId,
