@@ -687,6 +687,7 @@ function GetHorseDataFromString(aStr) {
     
     }  
   
+    log.info(" horseData id " + horseData.id.toString());
      var d = new Date();
      d.setFullYear(parseInt(sts[15]), parseInt(sts[16]), parseInt(sts[17]));
      d.setHours(parseInt(sts[18]), parseInt(sts[19]), parseInt(sts[20]));
@@ -705,7 +706,7 @@ function GetHorseDataFromString(aStr) {
      horseData.grooDate = d;
         
 
-
+     log.info(" horseData grooDate " + horseData.grooDate.toString());
     return horseData;
    
 }
