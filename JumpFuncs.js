@@ -419,7 +419,7 @@ handlers.breeding = function (args)
         return {
             ret: "-5",
             horsedata: "0",
-            playercoins: "0",
+            playercoins: "0", 
             playergems: "0"
         }
     }
