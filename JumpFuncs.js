@@ -407,11 +407,16 @@ handlers.feeding = function (args) {
 
 handlers.breeding = function (args) 
 {
-    var marestr = args.marestr;
-    var stallionstr = args.stallionstr;
+    //var marestr = args.marestr;
+    //var stallionstr = args.stallionstr;
+    var lidMare = args.idmare;
+    var lidStallion = args.idstallion;   
     var lname = args.name;
     var lcoins = args.coins;
     var lgems = args.gems;
+
+    var marestr ;
+    var stallionstr;
 
     log.info(" HOrse to breed 1 : " + args.name);
 
@@ -447,7 +452,14 @@ handlers.breeding = function (args)
             lbreedid = lbreedidInt.toString();
 
         }
-        
+        if (playerData.Data["horseid_" + lidMare.toString()]) {
+
+            marestr = playerData.Data["horseid_" + lidMare.toString()]
+        }
+        if (playerData.Data["horseid_" + lidStallion.toString()]) {
+
+            stallionstr = playerData.Data["horseid_" + lidStallion.toString()]
+        }
 
     }
     log.info(" HOrse to breed ID: " + lbreedid);
