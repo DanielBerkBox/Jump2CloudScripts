@@ -469,6 +469,8 @@ handlers.breeding = function (args)
 
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
+    log.info("  lhorsedataMare" + lhorsedataMare);
+    log.info("  lhorsedataStallion" + lhorsedataStallion);
     log.info("  Stattlion and mare id:" + lhorsedataStallion.id + "," + lhorsedataMare.id);
     if ((lhorsedataStallion.id == "0") || (lhorsedataMare.id == "0")) {
 
