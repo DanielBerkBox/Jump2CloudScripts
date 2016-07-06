@@ -454,11 +454,11 @@ handlers.breeding = function (args)
         }
         if (playerData.Data["horseid_" + lidMare.toString()]) {
 
-            marestr = playerData.Data["horseid_" + lidMare.toString()]
+            marestr = playerData.Data["horseid_" + lidMare.toString()].Value;
         }
         if (playerData.Data["horseid_" + lidStallion.toString()]) {
 
-            stallionstr = playerData.Data["horseid_" + lidStallion.toString()]
+            stallionstr = playerData.Data["horseid_" + lidStallion.toString()].Value;
         }
 
     }
