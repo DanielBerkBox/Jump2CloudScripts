@@ -417,6 +417,7 @@ handlers.breeding = function (args)
     var lbreedid = "1000";
     var jhorsesnum = 0;   
 
+    log.info(" HOrse to breed: " + args.name);
     var playerData = server.GetUserData(
    {
        PlayFabId: currentPlayerId,
@@ -439,6 +440,8 @@ handlers.breeding = function (args)
         
 
     }
+    log.info(" HOrse to breed ID: " + lbreedid);
+
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
     if ((lhorsedataStallion.id == "0") || (lhorsedataMare.id == "0")) {
@@ -450,6 +453,8 @@ handlers.breeding = function (args)
             playergems: "0"
         }
     }
+
+    log.info(" Stattlion id:"  +lhorsedataStallion.id);
 
     var breeddata = DoBreed(marestr, stallionstr);
     breeddata.id = lbreedid;
@@ -463,6 +468,7 @@ handlers.breeding = function (args)
     var retbuy = DoBuy(argbuy);
     retbuy["horsedata"] = argbuy["strhorse"];
 
+    log.info(" Stattlion id:" + retbuy["horsedata"]);
     return retbuy;
 
 }
