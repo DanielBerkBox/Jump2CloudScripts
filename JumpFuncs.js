@@ -1061,9 +1061,9 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     rnd = Math.floor((Math.random() * 10) + 1);
     attrrnd = Math.floor((Math.random() * 6) + 1) - vaux;
     if (rnd >= mareorstallion)
-        ret = stalliondata[aAttr] + attrrnd;
+        ret = aStallion[aAttr] + attrrnd;
     else
-        ret = maredata[aAttr] + attrrnd;
+        ret = aMare[aAttr] + attrrnd;
 
     log.info(" attr ret :" + ret.toString());
     return ret;
