@@ -974,7 +974,9 @@ function DoBuy(args) {
 
 function DoBreed(marestr,stallionstr) 
 {
+    log.inf(" DOBREED marestr: " + marestr);
     var maredata = GetHorseDataFromString(marestr);
+    log.inf(" DOBREED stallionstr: " + stallionstr);
     var stalliondata = GetHorseDataFromString(stallionstr);
     var breeddata = GetHorseDataFromString(marestr);
     var lcoins = parseInt(maredata.coinsPrice);
