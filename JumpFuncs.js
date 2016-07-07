@@ -974,9 +974,9 @@ function DoBuy(args) {
 
 function DoBreed(marestr,stallionstr) 
 {
-    log.inf(" DOBREED marestr: " + marestr);
+    log.info(" DOBREED marestr: " + marestr);
     var maredata = GetHorseDataFromString(marestr);
-    log.inf(" DOBREED stallionstr: " + stallionstr);
+    log.info(" DOBREED stallionstr: " + stallionstr);
     var stalliondata = GetHorseDataFromString(stallionstr);
     var breeddata = GetHorseDataFromString(marestr);
     var lcoins = parseInt(maredata.coinsPrice);
@@ -984,7 +984,7 @@ function DoBreed(marestr,stallionstr)
     var rnd = 0;
     var attrrnd = 0;
 
-    log.inf(" DOBREED: " + breeddata.id);
+    log.info(" DOBREED: " + breeddata.id);
 
     // preco do breed sera igual ao maior valor entre mare e stallion.
     /*if (parseInt(stalliondata.coinsPrice) > lcoins)
@@ -1003,7 +1003,7 @@ function DoBreed(marestr,stallionstr)
     breeddata.mindfulness = GetAttrValue("mindfulness", stalliondata, maredata).toString();
     breeddata.genetics = GetAttrValue("genetics", stalliondata, maredata).toString();
 
-    log.inf(" DOBREED MINDFULL " + breeddata.mindfulness.toString());
+    log.info(" DOBREED MINDFULL " + breeddata.mindfulness.toString());
 
     rnd = Math.floor((Math.random() * 3) + 1) - 1;
     breeddata.idDet_Leg = rnd.toString();
@@ -1018,7 +1018,7 @@ function DoBreed(marestr,stallionstr)
         breeddata.crinar = stalliondata.crinar;
     }
 
-    log.inf(" DOBREED CRINA " + breeddata.crinaa.toString());
+    log.info(" DOBREED CRINA " + breeddata.crinaa.toString());
 
     rnd = Math.floor((Math.random() * 9) + 1);
     breeddata.idDet_Main = "0" + rnd.toString();    
@@ -1026,7 +1026,7 @@ function DoBreed(marestr,stallionstr)
     breeddata.gender = rnd.toString();
 
     breeddata.breedDate = new Date();
-    log.inf(" DOBREED DATE " + breeddata.breedDate.toString());
+    log.info(" DOBREED DATE " + breeddata.breedDate.toString());
     return breeddata;
     
 }
