@@ -1039,10 +1039,14 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     var vaux = -4;
     var mareorstallion = 5;
 
+    log.info(" attr:" + aAttr);
+
     if (aStallion.genetics > aMare.genetics)
         mareorstallion = 4;
     if (aMare.genetics > aStallion.genetics)
         mareorstallion = 6;
+
+    log.info(" attr mareorstallion :" + mareorstallion.toString());
 
     rnd = Math.floor((Math.random() * 100) + 1);
     if (rnd < aStallion.genetics)
@@ -1052,6 +1056,8 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     if (rnd < aMare.genetics)
         vaux = vaux + 1;
 
+    log.info(" attr vaux :" + vaux.toString());
+
     rnd = Math.floor((Math.random() * 10) + 1);
     attrrnd = Math.floor((Math.random() * 6) + 1) - vaux;
     if (rnd >= mareorstallion)
@@ -1059,5 +1065,6 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     else
         ret = maredata[aAttr] + attrrnd;
 
+    log.info(" attr ret :" + ret.toString());
     return ret;
 }
