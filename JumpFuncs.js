@@ -1065,6 +1065,8 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     else
         ret = aMare[aAttr] + attrrnd;
 
+    log.info(" aStallion[aAttr] " + aStallion[aAttr].toString() + " aMare[aAttr] " + aMare[aAttr].toString() + " attrrnd " + attrrnd.toString());
+
     log.info(" attr ret :" + ret.toString());
     return ret;
 }
