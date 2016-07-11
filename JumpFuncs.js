@@ -932,6 +932,11 @@ function DoBuy(args) {
     dataux["horsesnum"] = jhorsesnum.toString();
     dataux["horsesids"] = GetHorseIdsString(jhorsesids);
 
+    // se for breed, registra o id para controle de geracao de breed ids
+    var idint = parseInt(horsedata.id);
+    if (idint >= 1000)
+        dataux["breedid"] = horsedata.id.toString();
+
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
@@ -1061,9 +1066,9 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     rnd = Math.floor((Math.random() * 10) + 1);
     attrrnd = Math.floor((Math.random() * 6) + 1) - vaux;
     if (rnd >= mareorstallion)
-        ret = aStallion[aAttr] + attrrnd;
+        ret = parseInt(aStallion[aAttr]) + attrrnd;
     else
-        ret = aMare[aAttr] + attrrnd;
+        ret = parseInt(aMare[aAttr]) + attrrnd;
 
     log.info(" aStallion[aAttr] " + aStallion[aAttr].toString() + " aMare[aAttr] " + aMare[aAttr].toString() + " attrrnd " + attrrnd.toString());
 
