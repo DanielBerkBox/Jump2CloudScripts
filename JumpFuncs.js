@@ -1,5 +1,5 @@
 // JavaScript source code
-var MIN_ATTR = 50;
+var MIN_ATTR = 60;
 var MAX_ATTR = 100;
 var GROOMIN_LOSE = 2;
 var GROOMIN_INC = 2;
@@ -900,6 +900,22 @@ function DoBuy(args) {
             hours: now.getHours().toString(),
             minuts: now.getMinutes().toString(),
             seconds: now.getSeconds().toString()
+        }
+    }
+
+    // limites de cavalo.
+    if (jhorsesids.length >= 20)
+    {
+        return {
+
+            ret: "-7",
+            year: now.getFullYear().toString(),
+            month: now.getMonth().toString(),
+            day: now.getDate().toString(),
+            hours: now.getHours().toString(),
+            minuts: now.getMinutes().toString(),
+            seconds: now.getSeconds().toString()
+
         }
     }
 
