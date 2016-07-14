@@ -854,6 +854,13 @@ function DoBuy(args) {
     var jhorsesnum = 0;
     var jhorsesids = [];
 
+    // ajusta datas feed e grooing 2016-0-14
+    horsedata.ateDate = now;
+    horsedata.ateDate.setDate(now.getDate() - 1);
+    horsedata.grooDate = now;
+    horsedata.grooDate.setDate(now.getDate() - 1);
+    strhorse = GetHorseString(horsedata);
+
     var playerData = server.GetUserData(
     {
         PlayFabId: currentPlayerId,
