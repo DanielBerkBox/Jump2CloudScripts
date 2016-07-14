@@ -286,7 +286,7 @@ handlers.feeding = function (args) {
     }
     if (args.food == 3) {
         lfoodinc = FOOD_INC_3;
-        lfoodcoins = FOOD_COINS_2;
+        lfoodcoins = FOOD_COINS_3;
         lfoodgem = FOOD_GEM_3;
         lcondmax = COND_LIMIT3;
     }
@@ -327,7 +327,7 @@ handlers.feeding = function (args) {
 
         return { ret: "-4", coins: "0", gems: "0", horsedata:""}
     }
-    var lattr = lhorsedata.condition - (daysdif * FOOD_LOSE) + lfoodinc;
+    var lattr = parseInt(lhorsedata.condition) - (daysdif * FOOD_LOSE) + lfoodinc;
     log.info(" daysdif : " + daysdif.toString() + "lhorsedata.condition " + lhorsedata.condition.toString());
     log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString());
     if (lattr < COND_LIMIT_MIN)
@@ -336,7 +336,7 @@ handlers.feeding = function (args) {
         lattr = lcondmax;
 
     lhorsedata.ateDate = now;
-    lhorsedata.condition = lattr;
+    lhorsedata.condition = lattr.toString();
     log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString() + " ateDate:" + lhorsedata.ateDate.toDateString());
 
     var dataux = {};
