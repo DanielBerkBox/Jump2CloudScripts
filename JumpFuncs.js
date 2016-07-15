@@ -1063,6 +1063,7 @@ function DoBreed(marestr,stallionstr)
     horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
     horsedata.grooDate = new Date();
     horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
+    log.info(" DOBREED Ate date " + breeddata.ateDate.toString());
     return breeddata;
     
 }
