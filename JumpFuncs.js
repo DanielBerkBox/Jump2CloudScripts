@@ -848,6 +848,7 @@ function DaysBetween  (date1, date2) {
 
 function DoBuy(args) {
 
+    log.info(" ENTROU NO BUY");
     log.info(" dobuy: " + arg.strhorse);
     var now = new Date();
     var strhorse = args.strhorse;
