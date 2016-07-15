@@ -1059,12 +1059,12 @@ function DoBreed(marestr,stallionstr)
     var now = new Date();
     breeddata.breedDate = now;
     log.info(" DOBREED DATE " + breeddata.breedDate.toString());
-    horsedata.ateDate = new Date();
-    horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
+    breeddata.ateDate = new Date();
+    breeddata.ateDate.setDate(breeddata.ateDate.getDate() - 1);
     log.info(" DOBREED Ate date " + breeddata.ateDate.toString());
 
-    horsedata.grooDate = new Date();
-    horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
+    breeddata.grooDate = new Date();
+    breeddata.grooDate.setDate(breeddata.grooDate.getDate() - 1);
     log.info(" DOBREED groo  date " + breeddata.grooDate.toString());
     
     return breeddata;
