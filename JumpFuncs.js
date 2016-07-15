@@ -855,10 +855,10 @@ function DoBuy(args) {
     var jhorsesids = [];
 
     // ajusta datas feed e grooing 2016-0-14
-    horsedata.ateDate = now;
-    horsedata.ateDate.setDate(now.getDate() - 1);
-    horsedata.grooDate = now;
-    horsedata.grooDate.setDate(now.getDate() - 1);
+    horsedata.ateDate = new Date();
+    horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
+    horsedata.grooDate = new Date();
+    horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
     strhorse = GetHorseString(horsedata);
 
     var playerData = server.GetUserData(
@@ -1056,10 +1056,10 @@ function DoBreed(marestr,stallionstr)
     var now = new Date();
     breeddata.breedDate = now;
     log.info(" DOBREED DATE " + breeddata.breedDate.toString());
-    horsedata.ateDate = now;
-    horsedata.ateDate.setDate(now.getDate() - 1);
-    horsedata.grooDate = now;
-    horsedata.grooDate.setDate(now.getDate() - 1);
+    horsedata.ateDate = new Date();
+    horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
+    horsedata.grooDate = new Date();
+    horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
     return breeddata;
     
 }
