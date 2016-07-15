@@ -492,6 +492,7 @@ handlers.breeding = function (args)
     argbuy["stritem"] = "0";
     log.info(" breed sthorse:" + argbuy["strhorse"]);
     var retbuy = DoBuy(argbuy);
+    log.info(" breed sthorse 2:" + argbuy["strhorse"]);
     retbuy["horsedata"] = argbuy["strhorse"];
     
 
