@@ -845,6 +845,7 @@ function DaysBetween  (date1, date2) {
 
 function DoBuy(args) {
 
+    log.info(" dobuy: " + arg.strhorse);
     var now = new Date();
     var strhorse = args.strhorse;
     var stritem = args.stritem;
@@ -853,6 +854,7 @@ function DoBuy(args) {
     var keysPlayerData = ["horsesnum", "horsesids"];
     var jhorsesnum = 0;
     var jhorsesids = [];
+    log.info(" dobuy: atedate " + horsedata.ateDate.toString());
 
     // ajusta datas feed e grooing 2016-0-14
     horsedata.ateDate = new Date();
@@ -960,6 +962,7 @@ function DoBuy(args) {
     if (idint >= 1000)
         dataux["breedid"] = horsedata.id.toString();
 
+    log.inf(" dobuy breedid " + horsedata.id.toString())
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
