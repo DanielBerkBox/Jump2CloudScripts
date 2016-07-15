@@ -486,12 +486,14 @@ handlers.breeding = function (args)
     breeddata.coinsPrice = lcoins;
     breeddata.gemsPrice = lgems;
     breeddata.name = lname;
+    log.info(" breed ret: id:" + breeddata.id);
     var argbuy = {};
     argbuy["strhorse"] = GetHorseString(breeddata);
     argbuy["stritem"] = "0";
-
+    log.info(" breed sthorse:" + argbuy["strhorse"]);
     var retbuy = DoBuy(argbuy);
     retbuy["horsedata"] = argbuy["strhorse"];
+    
 
     log.info(" Stattlion id:" + retbuy["horsedata"]);
     return retbuy;
