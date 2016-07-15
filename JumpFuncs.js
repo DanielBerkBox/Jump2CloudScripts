@@ -1052,9 +1052,14 @@ function DoBreed(marestr,stallionstr)
     breeddata.idDet_Main = "0" + rnd.toString();    
     rnd = Math.floor((Math.random() * 2) + 1);
     breeddata.gender = rnd.toString();
-
-    breeddata.breedDate = new Date();
+    
+    var now = new Date();
+    breeddata.breedDate = now;
     log.info(" DOBREED DATE " + breeddata.breedDate.toString());
+    horsedata.ateDate = now;
+    horsedata.ateDate.setDate(now.getDate() - 1);
+    horsedata.grooDate = now;
+    horsedata.grooDate.setDate(now.getDate() - 1);
     return breeddata;
     
 }
