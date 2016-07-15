@@ -865,8 +865,9 @@ function DoBuy(args) {
     horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
     horsedata.grooDate = new Date();
     horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
+    log.info(" dobuy: groodate " + horsedata.grooDate.toString());
     strhorse = GetHorseString(horsedata);
-
+    log.info(" dobuy: strhorse bew dates : " + strhorse);
     var playerData = server.GetUserData(
     {
         PlayFabId: currentPlayerId,
