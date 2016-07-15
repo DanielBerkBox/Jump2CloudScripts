@@ -967,7 +967,7 @@ function DoBuy(args) {
     if (idint >= 1000)
         dataux["breedid"] = horsedata.id.toString();
 
-    log.inf(" dobuy breedid " + horsedata.id.toString())
+    log.info(" dobuy breedid " + horsedata.id.toString())
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
