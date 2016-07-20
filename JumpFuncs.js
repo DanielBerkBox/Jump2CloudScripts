@@ -463,8 +463,9 @@ handlers.breeding = function (args)
 
     }
   
-    log.info("  stallionstr " + stallionstr);
+    log.info("  stallionstr " + stallionstr );
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
+    log.info("  marestr " + marestr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
     log.info("  lhorsedataMare" + lhorsedataMare);
     log.info("  lhorsedataStallion" + lhorsedataStallion);
@@ -688,7 +689,9 @@ function GetHorseDataFromString(aStr) {
         "crinaa": sts[39]
         
     
-    }  
+    }
+
+    log.info(" GetHorseDataFromString horseData: " + horseData.toString());
   
     
      var d = new Date();
@@ -696,11 +699,15 @@ function GetHorseDataFromString(aStr) {
      d.setHours(parseInt(sts[18]), parseInt(sts[19]), parseInt(sts[20]));
      horseData.breedDate = d;
 
+     log.info(" GetHorseDataFromString  horseData.breedDate: " + horseData.breedDate.toString());
+
      d = new Date();
      d.setFullYear(parseInt(sts[21]), parseInt(sts[22]), parseInt(sts[23]));
      d.setHours(parseInt(sts[24]), parseInt(sts[25]), parseInt(sts[26]));
      //horseData["breedDate"] = d;
      horseData.ateDate = d;
+
+     log.info(" GetHorseDataFromString  horseData.ateDate: " + horseData.ateDate.toString());
 
      d = new Date();
      d.setFullYear(parseInt(sts[27]), parseInt(sts[28]), parseInt(sts[29]));
@@ -708,6 +715,7 @@ function GetHorseDataFromString(aStr) {
     //horseData["breedDate"] = d;
      horseData.grooDate = d;
         
+     log.info(" GetHorseDataFromString  horseData.grooDate: " + horseData.grooDate.toString());
 
      
     return horseData;
