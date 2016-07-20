@@ -463,7 +463,7 @@ handlers.breeding = function (args)
 
     }
   
-
+    log.info("  stallionstr " + stallionstr);
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
     log.info("  lhorsedataMare" + lhorsedataMare);
