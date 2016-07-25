@@ -483,6 +483,14 @@ handlers.breeding = function (args)
     log.info(" Stattlion id:"  +lhorsedataStallion.id);
 
     var breeddata = DoBreed(marestr, stallionstr);
+    // teste
+    return {
+        ret: "-3",
+        horsedata: "0",
+        playercoins: "0",
+        playergems: "0"
+    }
+    //========================
     breeddata.id = lbreedid;
     breeddata.coinsPrice = lcoins;
     breeddata.gemsPrice = lgems;
@@ -1086,6 +1094,38 @@ function DoBreed(marestr,stallionstr)
 
 function GetAttrValue(aAttr, aStallion, aMare) {
 
+    var ret = 0;
+    var difdefault = MAX_ATTR - MIN_ATTR;
+    var difmare = parseInt(aMare[aAttr]) - MIN_ATTR;
+    var difstallion = parseInt(aStallion[aAttr]) - MIN_ATTR;
+    var gapMare = MAX_ATTR - parseInt(aMare[aAttr]);
+    var gapStallion = MAX_ATTR - parseInt(aStallion[aAttr]);    
+
+    var percentMare = 20.5 * ( MAX_ATTR - parseInt(aMare.genetics.toString())/difdefault);
+    var percentStallion = 20.5 * (MAX_ATTR - parseInt(aStallion.genetics.toString()) / difdefault);
+
+    log.info(" percentMare:" + percentMare.toString() + " percentStallion:" + percentStallion.toString());
+
+    var variavelMare = (Math.random() * 15) + 1;
+    var variavelStallion = (Math.random() * 15) + 1;
+
+    percentMare = percentMare - variavelMare;
+    percentStallion = percentStallion - variavelStallion;
+
+    var resultMare =  parseInt(aMare[aAttr]) + (gapMare * (percentMare / 100));
+    var resultStallion = parseInt(aStallion[aAttr]) +( gapStallion * (percentStallion / 100));
+    var resultM =  Math.floor((resultMare+resultStallion)/2);
+    ret = parseInt(resultM.toString());    
+    
+    if(ret > MAX_ATTR)
+        ret = MAX_ATTR;
+    if (ret < MIN_ATTR)
+        ret = MIN_ATTR;
+
+    log.info(aAttr + " ret attr:" + ret.toString());
+    return ret;
+
+    /*
     var rnd = 0;
     var attrrnd = 0;
     var ret = 0;
@@ -1121,5 +1161,5 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     log.info(" aStallion[aAttr] " + aStallion[aAttr].toString() + " aMare[aAttr] " + aMare[aAttr].toString() + " attrrnd " + attrrnd.toString());
 
     log.info(" attr ret :" + ret.toString());
-    return ret;
+    return ret;*/
 }
