@@ -483,14 +483,7 @@ handlers.breeding = function (args)
     log.info(" Stattlion id:"  +lhorsedataStallion.id);
 
     var breeddata = DoBreed(marestr, stallionstr);
-    // teste
-    return {
-        ret: "-3",
-        horsedata: "0",
-        playercoins: "0",
-        playergems: "0"
-    }
-    //========================
+    
     breeddata.id = lbreedid;
     breeddata.coinsPrice = lcoins;
     breeddata.gemsPrice = lgems;
