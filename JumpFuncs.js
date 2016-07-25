@@ -1104,6 +1104,8 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     var percentMare = 20.5 * ( MAX_ATTR - parseInt(aMare.genetics.toString())/difdefault);
     var percentStallion = 20.5 * (MAX_ATTR - parseInt(aStallion.genetics.toString()) / difdefault);
 
+    log.info(" aMare.genetics :" + aMare.genetics);
+    log.info(" MAX - aMare.genetics :" + (MAX_ATTR - parseInt(aStallion.genetics.toString())));
     log.info(" difbyGenetic" + (MAX_ATTR - parseInt(aMare.genetics.toString()) / difdefault).toString());
     log.info("difdefault: " + difdefault.toString() +" percentMare:" + percentMare.toString() + " percentStallion:" + percentStallion.toString());
 
