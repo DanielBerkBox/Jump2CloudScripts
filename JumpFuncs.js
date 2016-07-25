@@ -1095,18 +1095,16 @@ function DoBreed(marestr,stallionstr)
 function GetAttrValue(aAttr, aStallion, aMare) {
 
     var ret = 0;
-    var difdefault = MAX_ATTR - MIN_ATTR;
-    var difmare = parseInt(aMare[aAttr]) - MIN_ATTR;
-    var difstallion = parseInt(aStallion[aAttr]) - MIN_ATTR;
+    var difdefault = MAX_ATTR - MIN_ATTR;  
     var gapMare = MAX_ATTR - parseInt(aMare[aAttr]);
-    var gapStallion = MAX_ATTR - parseInt(aStallion[aAttr]);    
+    var gapStallion = MAX_ATTR - parseInt(aStallion[aAttr]);
 
-    var percentMare = 20.5 * ( MAX_ATTR - parseInt(aMare.genetics.toString())/difdefault);
-    var percentStallion = 20.5 * (MAX_ATTR - parseInt(aStallion.genetics.toString()) / difdefault);
+    log.info("gaps: M:" + gapMare.toString() + " S:" + gapStallion.toString());    
 
-    log.info(" aMare.genetics :" + aMare.genetics);
-    log.info(" MAX - aMare.genetics :" + (MAX_ATTR - parseInt(aStallion.genetics.toString())));
-    log.info(" difbyGenetic" + (MAX_ATTR - parseInt(aMare.genetics.toString()) / difdefault).toString());
+    var percentMare = 20.5 * (parseInt(aMare.genetics.toString()) / MAX_ATTR);
+    var percentStallion = 20.5 * (parseInt(aStallion.genetics.toString()) / MAX_ATTR);
+
+    log.info(" aMare.genetics :" + aMare.genetics);    
     log.info("difdefault: " + difdefault.toString() +" percentMare:" + percentMare.toString() + " percentStallion:" + percentStallion.toString());
 
     var variavelMare = (Math.random() * 15) + 1;
