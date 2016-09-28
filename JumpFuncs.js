@@ -318,7 +318,7 @@ handlers.feeding = function (args) {
       
     var lhorsedata = GetHorseDataFromString(lhorsedataStr);
     var daysdif = DaysBetween(lhorsedata.ateDate, now);
-    log.info(" daysdif : " + daysdif.toString() + " now:" + now.toDateString() + " ateDate:" + lhorsedata.ateDate.toDateString());
+    //log.info(" daysdif : " + daysdif.toString() + " now:" + now.toDateString() + " ateDate:" + lhorsedata.ateDate.toDateString());
     // primeira vez.
     if (daysdif > 9999)
         daysdif = 1;
@@ -328,8 +328,8 @@ handlers.feeding = function (args) {
         return { ret: "-4", coins: "0", gems: "0", horsedata:""}
     }
     var lattr = parseInt(lhorsedata.condition) - (daysdif * FOOD_LOSE) + lfoodinc;
-    log.info(" daysdif : " + daysdif.toString() + "lhorsedata.condition " + lhorsedata.condition.toString());
-    log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString());
+    //log.info(" daysdif : " + daysdif.toString() + "lhorsedata.condition " + lhorsedata.condition.toString());
+    //log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString());
     if (lattr < COND_LIMIT_MIN)
         lattr = COND_LIMIT_MIN;
     if (lattr > lcondmax)
@@ -337,7 +337,7 @@ handlers.feeding = function (args) {
 
     lhorsedata.ateDate = now;
     lhorsedata.condition = lattr.toString();
-    log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString() + " ateDate:" + lhorsedata.ateDate.toDateString());
+    //log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString() + " ateDate:" + lhorsedata.ateDate.toDateString());
 
     var dataux = {};
     var keyaux = "horseid_" + lhorsedata.id;
@@ -418,7 +418,7 @@ handlers.breeding = function (args)
     //var marestr ;
     //var stallionstr;
 
-    log.info("  ***** BREEDING *****  : " + args.name); 
+    //log.info("  ***** BREEDING *****  : " + args.name); 
 
     /*return {
             ret: "-5",
@@ -463,13 +463,13 @@ handlers.breeding = function (args)
 
     }
   
-    log.info("  stallionstr " + stallionstr );
+    //log.info("  stallionstr " + stallionstr );
     var lhorsedataStallion = GetHorseDataFromString(stallionstr);
-    log.info("  marestr " + marestr);
+    //log.info("  marestr " + marestr);
     var lhorsedataMare = GetHorseDataFromString(marestr);
-    log.info("  lhorsedataMare" + lhorsedataMare);
-    log.info("  lhorsedataStallion" + lhorsedataStallion);
-    log.info("  Stattlion and mare id:" + lhorsedataStallion.id + "," + lhorsedataMare.id);
+    //log.info("  lhorsedataMare" + lhorsedataMare);
+    //log.info("  lhorsedataStallion" + lhorsedataStallion);
+    //log.info("  Stattlion and mare id:" + lhorsedataStallion.id + "," + lhorsedataMare.id);
     if ((lhorsedataStallion.id == "0") || (lhorsedataMare.id == "0")) {
 
         return {
@@ -480,7 +480,7 @@ handlers.breeding = function (args)
         }
     }
 
-    log.info(" Stattlion id:"  +lhorsedataStallion.id);
+    //log.info(" Stattlion id:"  +lhorsedataStallion.id);
 
     var breeddata = DoBreed(marestr, stallionstr);
     
@@ -488,17 +488,17 @@ handlers.breeding = function (args)
     breeddata.coinsPrice = lcoins;
     breeddata.gemsPrice = lgems;
     breeddata.name = lname;
-    log.info(" breed ret: id:" + breeddata.id);
+    //log.info(" breed ret: id:" + breeddata.id);
     var argbuy = {};
     argbuy["strhorse"] = GetHorseString(breeddata);
     argbuy["stritem"] = "0";
-    log.info(" breed sthorse:" + argbuy["strhorse"]);
+    //log.info(" breed sthorse:" + argbuy["strhorse"]);
     var retbuy = DoBuy(argbuy);
-    log.info(" breed sthorse 2:" + argbuy["strhorse"]);
+    //log.info(" breed sthorse 2:" + argbuy["strhorse"]);
     retbuy["horsedata"] = argbuy["strhorse"];
     
 
-    log.info(" Stattlion id:" + retbuy["horsedata"]);
+   // log.info(" Stattlion id:" + retbuy["horsedata"]);
     return retbuy;
 
 }
@@ -542,12 +542,12 @@ handlers.buyitem = function (args) {
             msg: "Horse not found"
         }
     }
-    log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
+    //log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems );
     
     if(lhorseitems != "0")
         itemsList = GetHorseItemFromString(lhorseitems);
    
-    log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
+   // log.info(" ITEM: " + itemid + " HORSE " + horseid + " itens: " + lhorseitems + " itemsList len: " + itemsList.length.toString());
    
     for (var i in itemsList) {
         var itaux = itemsList[i];
@@ -561,7 +561,7 @@ handlers.buyitem = function (args) {
     }
     
     itemsList.push(itemid);
-    log.info(" itemsList len 2: " + itemsList.length.toString());
+   // log.info(" itemsList len 2: " + itemsList.length.toString());
    
     if (parseInt(itemcoins) > playerCash.playerCoins) {
         return {
@@ -692,7 +692,7 @@ function GetHorseDataFromString(aStr) {
     
     }
 
-    log.info(" GetHorseDataFromString horseData: " + horseData.toString());
+    //log.info(" GetHorseDataFromString horseData: " + horseData.toString());
   
     
      var d = new Date();
@@ -700,7 +700,7 @@ function GetHorseDataFromString(aStr) {
      d.setHours(parseInt(sts[18]), parseInt(sts[19]), parseInt(sts[20]));
      horseData.breedDate = d;
 
-     log.info(" GetHorseDataFromString  horseData.breedDate: " + horseData.breedDate.toString());
+     //log.info(" GetHorseDataFromString  horseData.breedDate: " + horseData.breedDate.toString());
 
      d = new Date();
      d.setFullYear(parseInt(sts[21]), parseInt(sts[22]), parseInt(sts[23]));
@@ -708,7 +708,7 @@ function GetHorseDataFromString(aStr) {
      //horseData["breedDate"] = d;
      horseData.ateDate = d;
 
-     log.info(" GetHorseDataFromString  horseData.ateDate: " + horseData.ateDate.toString());
+     //log.info(" GetHorseDataFromString  horseData.ateDate: " + horseData.ateDate.toString());
 
      d = new Date();
      d.setFullYear(parseInt(sts[27]), parseInt(sts[28]), parseInt(sts[29]));
@@ -716,7 +716,7 @@ function GetHorseDataFromString(aStr) {
     //horseData["breedDate"] = d;
      horseData.grooDate = d;
         
-     log.info(" GetHorseDataFromString  horseData.grooDate: " + horseData.grooDate.toString());
+     //log.info(" GetHorseDataFromString  horseData.grooDate: " + horseData.grooDate.toString());
 
      
     return horseData;
@@ -857,8 +857,8 @@ function DaysBetween  (date1, date2) {
 
 function DoBuy(args) {
 
-    log.info(" ENTROU NO BUY");
-    log.info(" dobuy: " + args.strhorse);
+    //log.info(" ENTROU NO BUY");
+    //log.info(" dobuy: " + args.strhorse);
     var now = new Date();
     var strhorse = args.strhorse;
     var stritem = args.stritem;
@@ -867,16 +867,16 @@ function DoBuy(args) {
     var keysPlayerData = ["horsesnum", "horsesids"];
     var jhorsesnum = 0;
     var jhorsesids = [];
-    log.info(" dobuy: atedate " + horsedata.ateDate.toString());
+    //log.info(" dobuy: atedate " + horsedata.ateDate.toString());
 
     // ajusta datas feed e grooing 2016-0-14
     horsedata.ateDate = new Date();
     horsedata.ateDate.setDate(horsedata.ateDate.getDate() - 1);
     horsedata.grooDate = new Date();
     horsedata.grooDate.setDate(horsedata.grooDate.getDate() - 1);
-    log.info(" dobuy: groodate " + horsedata.grooDate.toString());
+   // log.info(" dobuy: groodate " + horsedata.grooDate.toString());
     strhorse = GetHorseString(horsedata);
-    log.info(" dobuy: strhorse bew dates : " + strhorse);
+   // log.info(" dobuy: strhorse bew dates : " + strhorse);
     var playerData = server.GetUserData(
     {
         PlayFabId: currentPlayerId,
@@ -976,7 +976,7 @@ function DoBuy(args) {
     if (idint >= 1000)
         dataux["breedid"] = horsedata.id.toString();
 
-    log.info(" dobuy breedid " + horsedata.id.toString())
+    //log.info(" dobuy breedid " + horsedata.id.toString())
     server.UpdateUserData({
 
         PlayFabId: currentPlayerId,
@@ -990,7 +990,7 @@ function DoBuy(args) {
 
     }
     );
-    log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + "| " + dataux["horsesids"] + " | " + jhorsesids.length.toString());
+    //log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + "| " + dataux["horsesids"] + " | " + jhorsesids.length.toString());
     if (horsedata.gemsPrice > 0) {
         var playerCurrency = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
@@ -1019,9 +1019,9 @@ function DoBuy(args) {
 
 function DoBreed(marestr,stallionstr) 
 {
-    log.info(" DOBREED marestr: " + marestr);
+    //log.info(" DOBREED marestr: " + marestr);
     var maredata = GetHorseDataFromString(marestr);
-    log.info(" DOBREED stallionstr: " + stallionstr);
+    //log.info(" DOBREED stallionstr: " + stallionstr);
     var stalliondata = GetHorseDataFromString(stallionstr);
     var breeddata = GetHorseDataFromString(marestr);
     var lcoins = parseInt(maredata.coinsPrice);
@@ -1029,7 +1029,7 @@ function DoBreed(marestr,stallionstr)
     var rnd = 0;
     var attrrnd = 0;
 
-    log.info(" DOBREED: " + breeddata.id);
+   // log.info(" DOBREED: " + breeddata.id);
 
     // preco do breed sera igual ao maior valor entre mare e stallion.
     /*if (parseInt(stalliondata.coinsPrice) > lcoins)
@@ -1048,7 +1048,7 @@ function DoBreed(marestr,stallionstr)
     breeddata.mindfulness = GetAttrValue("mindfulness", stalliondata, maredata).toString();
     breeddata.genetics = GetAttrValue("genetics", stalliondata, maredata).toString();
 
-    log.info(" DOBREED MINDFULL " + breeddata.mindfulness.toString());
+    //log.info(" DOBREED MINDFULL " + breeddata.mindfulness.toString());
 
     rnd = Math.floor((Math.random() * 3) + 1) - 1;
     breeddata.idDet_Leg = rnd.toString();
@@ -1063,7 +1063,7 @@ function DoBreed(marestr,stallionstr)
         breeddata.crinar = stalliondata.crinar;
     }
 
-    log.info(" DOBREED CRINA " + breeddata.crinaa.toString());
+    //log.info(" DOBREED CRINA " + breeddata.crinaa.toString());
 
     rnd = Math.floor((Math.random() * 9) + 1);
     breeddata.idDet_Main = "0" + rnd.toString();    
@@ -1072,14 +1072,14 @@ function DoBreed(marestr,stallionstr)
     
     var now = new Date();
     breeddata.breedDate = now;
-    log.info(" DOBREED DATE " + breeddata.breedDate.toString());
+    //log.info(" DOBREED DATE " + breeddata.breedDate.toString());
     breeddata.ateDate = new Date();
     breeddata.ateDate.setDate(breeddata.ateDate.getDate() - 1);
-    log.info(" DOBREED Ate date " + breeddata.ateDate.toString());
+    //log.info(" DOBREED Ate date " + breeddata.ateDate.toString());
 
     breeddata.grooDate = new Date();
     breeddata.grooDate.setDate(breeddata.grooDate.getDate() - 1);
-    log.info(" DOBREED groo  date " + breeddata.grooDate.toString());
+   // log.info(" DOBREED groo  date " + breeddata.grooDate.toString());
     
     return breeddata;
     
@@ -1092,13 +1092,13 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     var gapMare = MAX_ATTR - parseInt(aMare[aAttr]);
     var gapStallion = MAX_ATTR - parseInt(aStallion[aAttr]);
 
-    log.info("gaps: M:" + gapMare.toString() + " S:" + gapStallion.toString());    
+    //log.info("gaps: M:" + gapMare.toString() + " S:" + gapStallion.toString());    
 
     var percentMare = 20.5 * (parseInt(aMare.genetics.toString()) / MAX_ATTR);
     var percentStallion = 20.5 * (parseInt(aStallion.genetics.toString()) / MAX_ATTR);
 
-    log.info(" aMare.genetics :" + aMare.genetics);    
-    log.info("difdefault: " + difdefault.toString() +" percentMare:" + percentMare.toString() + " percentStallion:" + percentStallion.toString());
+    //log.info(" aMare.genetics :" + aMare.genetics);    
+    //log.info("difdefault: " + difdefault.toString() +" percentMare:" + percentMare.toString() + " percentStallion:" + percentStallion.toString());
 
     var variavelMare = (Math.random() * 15) + 1;
     var variavelStallion = (Math.random() * 15) + 1;
@@ -1116,7 +1116,7 @@ function GetAttrValue(aAttr, aStallion, aMare) {
     if (ret < MIN_ATTR)
         ret = MIN_ATTR;
 
-    log.info(aAttr + " ret attr:" + ret.toString());
+   // log.info(aAttr + " ret attr:" + ret.toString());
     return ret;
 
     /*
