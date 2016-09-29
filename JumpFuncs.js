@@ -665,7 +665,7 @@ handlers.sellHorse = function (args)
         }
     }
     if (idxtoDel >= 0) {
-        jhorsesids.splice(idxtoDel, 0);
+        jhorsesids.splice(idxtoDel, 1);
         jhorsesnum--;
     }
     else {
