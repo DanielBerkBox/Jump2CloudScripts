@@ -15,6 +15,7 @@ var COND_LIMIT_MIN = 70;
 var COND_LIMIT1 = 80;
 var COND_LIMIT2 = 85;
 var COND_LIMIT3 = 90;
+var GEM_PER_WIN = 1;
 
 
 handlers.getPlayerData = function (args) {
@@ -620,6 +621,182 @@ handlers.buyitem = function (args) {
         itemid: itemid
     }    
 
+
+}
+
+handlers.sellHorse = function (args)
+{
+    var strhorse = args.strhorse;    
+    var horsedata = GetHorseDataFromString(strhorse);
+    var keysPlayerData = ["horsesnum", "horsesids"];    
+    var keysToDel = ["horseid_" + horsedata.id, "horseitems_" + horsedata.id];
+    var jhorsesnum = 0;
+    var jhorsesids = [];
+    var playerData = server.GetUserData(
+   {
+       PlayFabId: currentPlayerId,
+       Keys: keysPlayerData
+   });
+    if (playerData.Data) {
+
+        if (playerData.Data["horsesnum"]) {
+            var horsesaux = playerData.Data["horsesnum"];
+            jhorsesnum = parseInt(horsesaux.Value);
+        }
+        if (playerData.Data["horsesids"]) {
+            var horsesidsaux = playerData.Data["horsesids"];
+            var straux = horsesidsaux.Value;
+            jhorsesids = GetHorseIdsFromString(straux);
+        }
+    }
+    if (jhorsesnum < 2) {
+
+        return {
+            ret: "-1"
+        }
+    }
+
+    var idxtoDel = -1;
+    for (var i in jhorsesids) {
+        var idaux = jhorsesids[i];
+        // cavalo já pertenco ao player
+        if (idaux == horsedata.id) {
+            idxtoDel = i;
+        }
+    }
+    if (idxtoDel >= 0) {
+        jhorsesids.splice(idxtoDel, 0);
+        jhorsesnum--;
+    }
+    else {
+        return {ret:"-2"}
+    }
+    var lcoins = parseInt(horsedata.coinsPrice) / 2;
+    var lgems = parseInt(horsedata.gemsPrice) / 2;
+
+    var dataux = {};       
+    dataux["horsesnum"] = jhorsesnum.toString();
+    dataux["horsesids"] = GetHorseIdsString(jhorsesids);
+
+    server.UpdateUserData({
+
+        PlayFabId: currentPlayerId,
+        "Data": dataux,
+        "KeysToRemove": keysToDel,        
+        "Permission": "Public"
+    });
+    var playerCurrency = server.AddUserVirtualCurrency({
+        PlayFabId: currentPlayerId,
+        VirtualCurrency: "GO",
+        Amount: lcoins.toString()
+
+    }
+    );
+    //log.info("log gemsPrice " + horsedata.id + " | " + horsedata.gemsPrice.toString() + "| " + dataux["horsesids"] + " | " + jhorsesids.length.toString());
+    if (horsedata.gemsPrice > 0) {
+        var playerCurrency = server.AddUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: lgems.gemsPrice
+
+        }
+       );
+    }
+
+    return {
+
+        ret: "1"
+        
+    }
+
+}
+
+handlers.raceDone = function (args) {
+
+    var lcost = parseInt(args.cost);
+    var lcoinsprize = parseInt(args.prize);
+    var lplace = parseInt(args.place);
+    var lgemPrize = parseInt(GEM_PER_WIN.toString());    
+    var keysPlayerData = ["wins", "held"];
+    var jwins = 0;
+    var jheld = 0;
+    var jsaldo = lCoinsprize - lcost;
+
+    var playerData = server.GetUserData(
+    {
+       PlayFabId: currentPlayerId,
+       Keys: keysPlayerData
+    });
+
+    if (playerData.Data) {        
+
+        if (playerData.Data["wins"]) {
+            var winsaux = playerData.Data["wins"];
+            jwins = parseInt(winsaux.Value);
+        }
+
+        if (playerData.Data["held"]) {
+            var heldaux = playerData.Data["held"];
+            jheld = parseInt(heldaux.Value);
+        }
+        
+    }
+    if (lplace > 1)
+        lgemPrize = 0;
+    else
+        jwins++;
+
+    jheld++;
+
+    var playerCurrency;
+    if (jsaldo > 0) {
+
+        playerCurrency = server.AddUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GO",
+            Amount: jsaldo.toString()
+
+        }
+        );
+    }
+    else
+    if (jsaldo < 0) {
+
+        playerCurrency = server.SubtractUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GO",
+            Amount: jsaldo.toString()
+
+        }
+       );
+    }
+
+    if (lgemPrize > 0) {
+             playerCurrency = server.AddUserVirtualCurrency({
+            PlayFabId: currentPlayerId,
+            VirtualCurrency: "GE",
+            Amount: lgemPrize.toString()
+
+        }
+       );
+    }
+    var dataux = {};  
+    dataux["wins"] = jwins.toString();
+    dataux["held"] = jheld.toString();
+    server.UpdateUserData({
+
+        PlayFabId: currentPlayerId,
+        "Data": dataux,
+        "Permission": "Public"
+    });
+
+    return {
+        ret: "1",
+        saldo: jsaldo.toString(),
+        gem: lgemPrize.toString()
+
+    }
+    
 
 }
 
