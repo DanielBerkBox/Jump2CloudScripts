@@ -703,7 +703,7 @@ handlers.sellHorse = function (args)
         var playerCurrency = server.AddUserVirtualCurrency({
             PlayFabId: currentPlayerId,
             VirtualCurrency: "GE",
-            Amount: lgems.gemsPrice
+            Amount: lgems.toString()
 
         }
        );
