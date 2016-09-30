@@ -229,10 +229,12 @@ handlers.grooming = function(args)
         return { ret: "-4", coins: "0", gems: "0", horsedata: "" }
     }
 
-    var lattr = lhorsedata.confidence - (daysdif * GROOMIN_LOSE) + GROOMIN_INC;
-    
+    //var lattr = lhorsedata.confidence - (daysdif * GROOMIN_LOSE) + GROOMIN_INC;
+    var lattr = lhorsedata.confidence - (daysdif * GROOMIN_LOSE);
     if (lattr < COND_LIMIT_MIN)
         lattr = COND_LIMIT_MIN;
+
+    lattr = lattr + GROOMIN_INC;
     if (lattr > MAX_ATTR)
         lattr = MAX_ATTR;
 
@@ -328,11 +330,15 @@ handlers.feeding = function (args) {
 
         return { ret: "-4", coins: "0", gems: "0", horsedata:""}
     }
-    var lattr = parseInt(lhorsedata.condition) - (daysdif * FOOD_LOSE) + lfoodinc;
+
+    //var lattr = parseInt(lhorsedata.condition) - (daysdif * FOOD_LOSE) + lfoodinc;
+    var lattr = parseInt(lhorsedata.condition) - (daysdif * FOOD_LOSE);
     //log.info(" daysdif : " + daysdif.toString() + "lhorsedata.condition " + lhorsedata.condition.toString());
     //log.info(" lattr : " + lattr.toString() + " lfoodinc " + lfoodinc.toString());
     if (lattr < COND_LIMIT_MIN)
         lattr = COND_LIMIT_MIN;
+
+    lattr = lattr + lfoodinc;
     if (lattr > lcondmax)
         lattr = lcondmax;
 
