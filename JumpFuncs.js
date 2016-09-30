@@ -15,7 +15,9 @@ var COND_LIMIT_MIN = 70;
 var COND_LIMIT1 = 80;
 var COND_LIMIT2 = 85;
 var COND_LIMIT3 = 90;
-var GEM_PER_WIN = 1;
+var GEM_PER_WIN = 5;
+var GEM_PER_2ND = 3;
+var GEM_PER_3ND = 1;
 
 
 handlers.getPlayerData = function (args) {
@@ -722,7 +724,7 @@ handlers.raceDone = function (args) {
     var lcost = parseInt(args.cost);
     var lcoinsprize = parseInt(args.prize);
     var lplace = parseInt(args.place);
-    var lgemPrize = parseInt(GEM_PER_WIN.toString());    
+    var lgemPrize = 0;//parseInt(GEM_PER_WIN.toString());
     var keysPlayerData = ["wins", "held"];
     var jwins = 0;
     var jheld = 0;
@@ -747,10 +749,18 @@ handlers.raceDone = function (args) {
         }
         
     }
-    if (lplace > 1)
-        lgemPrize = 0;
-    else
+    if (lplace == 1) {
+        lgemPrize = parseInt(GEM_PER_WIN.toString());//lgemPrize = 0;
         jwins++;
+    }
+    else
+    if (lplace == 2) {
+        lgemPrize = parseInt(GEM_PER_2ND.toString());
+    }
+    else
+    if (lplace == 3) {
+        lgemPrize = parseInt(GEM_PER_3ND.toString());
+    }
 
     jheld++;
 
