@@ -826,33 +826,29 @@ function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
     var lplayerGem = 0;
-    var infoAux = { GetUserVirtualCurrency:true }
-    log.info("GetPlayerCurrency: 1 ");
+    var infoAux = { GetUserVirtualCurrency: true }
+    var inforesult;
+    
     var combined = server.GetPlayerCombinedInfo({
 
         PlayFabId: currentPlayerId,
         InfoRequestParameters: infoAux
     });
-    log.info("GetPlayerCurrency: 2 ");
+   
     if (combined) {
 
         if (combined["InfoResultPayload"]) {
-            log.info("GetPlayerCurrency: 2,5 " + combined.toString());
-        }
-
-        log.info("GetPlayerCurrency: 3 " + combined.toString());
-
-        if (combined.data)
-        log.info("GetPlayerCurrency: 4 ");
+            //log.info("GetPlayerCurrency: 2,5 " + combined.toString());
+            inforesult = combined["InfoResultPayload"];
+        }        
+        
     }
-    if (combined.data)
-        log.info("GetPlayerCombinedInfo:" + combined.data.toString());
-        if (combined.data["InfoResultPayload"]) {
-
-            var inforesult = combined.data["InfoResultPayload"];
+    if (inforesult) {
+        
+            //var inforesult = combined.data["InfoResultPayload"];
             if (inforesult.UserVirtualCurrency) {
 
-                log.info(" UserVirtualCurrency : " + inforesult.UserVirtualCurrency.toString());
+                //log.info(" UserVirtualCurrency : " + inforesult.UserVirtualCurrency.toString());
                 lplayerCoins = parseInt(inforesult.UserVirtualCurrency["GO"]);
                 lplayerGem = parseInt(inforesult.UserVirtualCurrency["GE"]);
             }
