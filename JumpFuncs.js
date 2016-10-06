@@ -812,6 +812,25 @@ handlers.raceDone = function (args) {
         "Permission": "Public"
     });
 
+    // statistics
+    var playerStats = server.GetPlayerStatistics({
+        PlayFabId: currentPlayerId
+    }).Statistics;
+
+    var lcoinsScore = { StatisticName: "coinsScore", Value: lcoinsprize };
+    if (playerStats) {
+        for (i = 0; i < playerStats.length; ++i) {
+            if (playerStats[i].StatisticName == "coinsScore") {
+                lcoinsScore.Value = playerStats[i].Value + lcoinsprize;
+            }
+        }
+    }
+
+    server.UpdatePlayerStatistics({
+        PlayFabId: currentPlayerId,
+        Statistics: [lcoinsScore]
+    });
+
     return {
         ret: "1",
         saldo: jsaldo.toString(),
