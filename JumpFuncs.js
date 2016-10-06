@@ -819,8 +819,30 @@ handlers.raceDone = function (args) {
 function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
-    var lplayerGem = 0;
+    var lplayerGem = 0;   
 
+    var combined = sever.GetPlayerCombinedInfo({
+
+        PlayFabId: currentPlayerId,
+        InfoRequestParameters:  {
+            GetUserVirtualCurrency:true
+        }
+    });
+
+    if (combined.data)
+        log.info("GetPlayerCombinedInfo:" + combined.data.toString());
+        if (combined.data["InfoResultPayload"]) {
+
+            var inforesult = combined.data["InfoResultPayload"];
+            if (inforesult.UserVirtualCurrency) {
+
+                log.info(" UserVirtualCurrency : " + inforesult.UserVirtualCurrency.toString());
+                lplayerCoins = parseInt(inforesult.UserVirtualCurrency["GO"]);
+                lplayerGem = parseInt(inforesult.UserVirtualCurrency["GE"]);
+            }
+        }
+
+    /*
     var playerCurrency = server.AddUserVirtualCurrency({
         PlayFabId: currentPlayerId,
         VirtualCurrency: "GO",
@@ -828,6 +850,7 @@ function GetPlayerCurrency()
     }
     )
    
+    
     if (playerCurrency["Balance"]) {
    
         lplayerCoins = playerCurrency["Balance"];
@@ -843,7 +866,7 @@ function GetPlayerCurrency()
     if (playerCurrency["Balance"]) {   
         lplayerGem = playerCurrency["Balance"];
     }
-
+    */
     return {
 
         playerCoins: lplayerCoins,
