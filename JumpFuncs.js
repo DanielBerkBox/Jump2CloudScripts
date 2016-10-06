@@ -835,6 +835,11 @@ function GetPlayerCurrency()
     });
     log.info("GetPlayerCurrency: 2 ");
     if (combined) {
+
+        if (combined["InfoResultPayload"]) {
+            log.info("GetPlayerCurrency: 2,5 " + combined.toString());
+        }
+
         log.info("GetPlayerCurrency: 3 " + combined.toString());
 
         if (combined.data)
