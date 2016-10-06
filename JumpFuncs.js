@@ -32,7 +32,13 @@ handlers.getPlayerData = function (args) {
 
     var keysPlayerData = ["gender", "color", "wins", "held", "horsesnum"];
 
-    var playerCurrency = server.AddUserVirtualCurrency({
+    var playerCurrency = GetPlayerCurrency();
+    if (playerCurrency)
+    {
+        playerCoins = playerCurrency.playerCoins;
+        playerGem = playerCurrency.playerGem;
+    }
+    /*var playerCurrency = server.AddUserVirtualCurrency({
         PlayFabId: currentPlayerId,
         VirtualCurrency: "GO",
         Amount : 0
@@ -54,7 +60,7 @@ handlers.getPlayerData = function (args) {
     if (playerCurrency["Balance"]) {
         //log.info("Player " + currentPlayerId + " already completed level " + levelNum);
         playerGem = playerCurrency["Balance"];
-    }
+    }*/
 
     var playerData = server.GetUserData(
 	{
