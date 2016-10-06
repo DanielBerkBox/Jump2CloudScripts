@@ -826,7 +826,7 @@ function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
     var lplayerGem = 0;   
-
+    log.info("GetPlayerCurrency: 1 ");
     var combined = sever.GetPlayerCombinedInfo({
 
         PlayFabId: currentPlayerId,
@@ -834,7 +834,7 @@ function GetPlayerCurrency()
             GetUserVirtualCurrency:true
         }
     });
-
+    log.info("GetPlayerCurrency: 2 ");
     if (combined.data)
         log.info("GetPlayerCombinedInfo:" + combined.data.toString());
         if (combined.data["InfoResultPayload"]) {
