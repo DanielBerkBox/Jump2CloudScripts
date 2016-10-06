@@ -825,14 +825,13 @@ handlers.raceDone = function (args) {
 function GetPlayerCurrency()
 {
     var lplayerCoins = 0;
-    var lplayerGem = 0;   
+    var lplayerGem = 0;
+    var infoAux = { GetUserVirtualCurrency:true }
     log.info("GetPlayerCurrency: 1 ");
     var combined = sever.GetPlayerCombinedInfo({
 
         PlayFabId: currentPlayerId,
-        InfoRequestParameters:  {
-            GetUserVirtualCurrency:true
-        }
+        InfoRequestParameters: infoAux
     });
     log.info("GetPlayerCurrency: 2 ");
     if (combined.data)
