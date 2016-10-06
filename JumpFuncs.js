@@ -828,7 +828,7 @@ function GetPlayerCurrency()
     var lplayerGem = 0;
     var infoAux = { GetUserVirtualCurrency:true }
     log.info("GetPlayerCurrency: 1 ");
-    var combined = sever.GetPlayerCombinedInfo({
+    var combined = server.GetPlayerCombinedInfo({
 
         PlayFabId: currentPlayerId,
         InfoRequestParameters: infoAux
