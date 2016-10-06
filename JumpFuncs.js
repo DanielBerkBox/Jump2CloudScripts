@@ -834,6 +834,12 @@ function GetPlayerCurrency()
         InfoRequestParameters: infoAux
     });
     log.info("GetPlayerCurrency: 2 ");
+    if (combined) {
+        log.info("GetPlayerCurrency: 3 ");
+
+        if (combined.Data)
+        log.info("GetPlayerCurrency: 4 ");
+    }
     if (combined.data)
         log.info("GetPlayerCombinedInfo:" + combined.data.toString());
         if (combined.data["InfoResultPayload"]) {
