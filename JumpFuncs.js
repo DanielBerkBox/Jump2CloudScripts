@@ -739,7 +739,7 @@ handlers.raceDone = function (args) {
     log.info(" racedone 0.5");
     var jwins = 0;
     var jheld = 0;
-    var jsaldo = lCoinsprize - lcost;
+    var jsaldo = lcoinsprize - lcost;
 
     log.info(" racedone 1");
     var playerData = server.GetUserData(
