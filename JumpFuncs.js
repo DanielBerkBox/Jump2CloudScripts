@@ -736,6 +736,7 @@ handlers.raceDone = function (args) {
     var jheld = 0;
     var jsaldo = lCoinsprize - lcost;
 
+    log.info(" racedone 1");
     var playerData = server.GetUserData(
     {
        PlayFabId: currentPlayerId,
@@ -755,6 +756,7 @@ handlers.raceDone = function (args) {
         }
         
     }
+    log.info(" racedone 2");
     if (lplace == 1) {
         lgemPrize = parseInt(GEM_PER_WIN.toString());//lgemPrize = 0;
         jwins++;
@@ -792,7 +794,7 @@ handlers.raceDone = function (args) {
         }
        );
     }
-
+    log.info(" racedone 3");
     if (lgemPrize > 0) {
              playerCurrency = server.AddUserVirtualCurrency({
             PlayFabId: currentPlayerId,
@@ -812,6 +814,7 @@ handlers.raceDone = function (args) {
         "Permission": "Public"
     });
 
+    log.info(" racedone 4");
     // statistics
     var playerStats = server.GetPlayerStatistics({
         PlayFabId: currentPlayerId
@@ -825,12 +828,13 @@ handlers.raceDone = function (args) {
             }
         }
     }
-
+    log.info(" racedone 5");
     server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [lcoinsScore]
     });
 
+    log.info(" racedone 6");
     return {
         ret: "1",
         saldo: jsaldo.toString(),
