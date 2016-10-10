@@ -727,12 +727,16 @@ handlers.sellHorse = function (args)
 
 handlers.raceDone = function (args) {
 
-    log.info(" racedone 0");
+    log.info(" racedone 0.1");
     var lcost = parseInt(args.cost);
+    log.info(" racedone 0.2");
     var lcoinsprize = parseInt(args.prize);
+    log.info(" racedone 0.3");
     var lplace = parseInt(args.place);
+    log.info(" racedone 0.4");
     var lgemPrize = 0;//parseInt(GEM_PER_WIN.toString());
     var keysPlayerData = ["wins", "held"];
+    log.info(" racedone 0.5");
     var jwins = 0;
     var jheld = 0;
     var jsaldo = lCoinsprize - lcost;
