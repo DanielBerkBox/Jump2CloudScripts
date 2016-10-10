@@ -727,6 +727,7 @@ handlers.sellHorse = function (args)
 
 handlers.raceDone = function (args) {
 
+    log.info(" racedone 0");
     var lcost = parseInt(args.cost);
     var lcoinsprize = parseInt(args.prize);
     var lplace = parseInt(args.place);
