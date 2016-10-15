@@ -726,8 +726,8 @@ handlers.sellHorse = function (args)
 }
 
 handlers.raceDone = function (args) {
-
-    //log.info(" racedone 0.1");
+        
+    //log.info(" racedone 0.10");
     var lcost = parseInt(args.cost);
     //log.info(" racedone 0.2");
     var lcoinsprize = parseInt(args.prize);
