@@ -727,21 +727,21 @@ handlers.sellHorse = function (args)
 
 handlers.raceDone = function (args) {
 
-    log.info(" racedone 0.1");
+    //log.info(" racedone 0.1");
     var lcost = parseInt(args.cost);
-    log.info(" racedone 0.2");
+    //log.info(" racedone 0.2");
     var lcoinsprize = parseInt(args.prize);
-    log.info(" racedone 0.3");
+    //log.info(" racedone 0.3");
     var lplace = parseInt(args.place);
-    log.info(" racedone 0.4");
+    //log.info(" racedone 0.4");
     var lgemPrize = 0;//parseInt(GEM_PER_WIN.toString());
     var keysPlayerData = ["wins", "held"];
-    log.info(" racedone 0.5");
+    //log.info(" racedone 0.5");
     var jwins = 0;
     var jheld = 0;
     var jsaldo = lcoinsprize - lcost;
 
-    log.info(" racedone 1");
+    //log.info(" racedone 1");
     var playerData = server.GetUserData(
     {
        PlayFabId: currentPlayerId,
@@ -761,7 +761,7 @@ handlers.raceDone = function (args) {
         }
         
     }
-    log.info(" racedone 2");
+    //log.info(" racedone 2");
     if (lplace == 1) {
         lgemPrize = parseInt(GEM_PER_WIN.toString());//lgemPrize = 0;
         jwins++;
@@ -799,7 +799,7 @@ handlers.raceDone = function (args) {
         }
        );
     }
-    log.info(" racedone 3");
+    //log.info(" racedone 3");
     if (lgemPrize > 0) {
              playerCurrency = server.AddUserVirtualCurrency({
             PlayFabId: currentPlayerId,
@@ -819,7 +819,7 @@ handlers.raceDone = function (args) {
         "Permission": "Public"
     });
 
-    log.info(" racedone 4");
+    //log.info(" racedone 4");
     // statistics
     var playerStats = server.GetPlayerStatistics({
         PlayFabId: currentPlayerId
@@ -833,13 +833,13 @@ handlers.raceDone = function (args) {
             }
         }
     }
-    log.info(" racedone 5");
+    //log.info(" racedone 5");
     server.UpdatePlayerStatistics({
         PlayFabId: currentPlayerId,
         Statistics: [lcoinsScore]
     });
 
-    log.info(" racedone 6");
+    //log.info(" racedone 6");
     return {
         ret: "1",
         saldo: jsaldo.toString(),
