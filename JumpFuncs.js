@@ -762,6 +762,7 @@ handlers.raceDone = function (args) {
         
     }
     log.info(" racedone 2");
+    log.info(" racedone lplace  =" + lplace.toString());
     if (lplace == 1) {
         lgemPrize = parseInt(GEM_PER_WIN.toString());//lgemPrize = 0;
         jwins++;
@@ -776,10 +777,11 @@ handlers.raceDone = function (args) {
     }
 
     jheld++;
-
+    log.info(" racedone 2.1");
     var playerCurrency;
     if (jsaldo > 0) {
 
+        log.info(" racedone saldo:" + jsaldo.toString());
         playerCurrency = server.AddUserVirtualCurrency({
             PlayFabId: currentPlayerId,
             VirtualCurrency: "GO",
@@ -791,6 +793,7 @@ handlers.raceDone = function (args) {
     else
     if (jsaldo < 0) {
 
+        log.info(" racedone saldo negativo:" + jsaldo.toString());
         log.info(" racedone saldo negativo");
         jsaldo = jsaldo * (-1);
         playerCurrency = server.SubtractUserVirtualCurrency({
