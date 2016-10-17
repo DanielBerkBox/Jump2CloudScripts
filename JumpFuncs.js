@@ -795,11 +795,12 @@ handlers.raceDone = function (args) {
 
         //log.info(" racedone saldo negativo:" + jsaldo.toString());
         //log.info(" racedone saldo negativo");
-        jsaldo = jsaldo * (-1);
+        //jsaldo = jsaldo * (-1);
+        var jneg = jsaldo * (-1);
         playerCurrency = server.SubtractUserVirtualCurrency({
             PlayFabId: currentPlayerId,
             VirtualCurrency: "GO",
-            Amount: jsaldo.toString()
+            Amount: jneg.toString()
 
         }
        );
@@ -830,11 +831,15 @@ handlers.raceDone = function (args) {
         PlayFabId: currentPlayerId
     }).Statistics;
 
-    var lcoinsScore = { StatisticName: "coinsScore", Value: lcoinsprize };
+    var lscoreaux = jsaldo;
+    // ganha no minimo 1 ponto.
+    if (lscoreaux < 0)
+        lscoreaux = 1;
+    var lcoinsScore = { StatisticName: "coinsScore", Value: lscoreaux };
     if (playerStats) {
         for (i = 0; i < playerStats.length; ++i) {
             if (playerStats[i].StatisticName == "coinsScore") {
-                lcoinsScore.Value = playerStats[i].Value + lcoinsprize;
+                lcoinsScore.Value = playerStats[i].Value + lscoreaux;
             }
         }
     }
