@@ -773,7 +773,7 @@ handlers.raceDone = function (args) {
     }
     else
     if (lplace == 2) {
-        lgemPrize = parseInt(GEM_PER_2ND.toString());
+        lgemPrize = parseInt(GEM_PER_2ND.toString()); 
     }
     else
     if (lplace == 3) {
