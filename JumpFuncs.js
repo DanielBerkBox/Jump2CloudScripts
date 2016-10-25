@@ -733,6 +733,10 @@ handlers.raceDone = function (args) {
     var lcoinsprize = parseInt(args.prize);
     //log.info(" racedone 0.3");
     var lplace = parseInt(args.place);
+    var lextraWins = parseInt(ars.extrawins);
+    var lextraHelds = parseInt(ars.extrahelds);    
+    var lextraGems = parseInt(ars.extragems);
+
     //log.info(" racedone 0.4");
     var lgemPrize = 0;//parseInt(GEM_PER_WIN.toString());
     var keysPlayerData = ["wins", "held"];
@@ -777,6 +781,12 @@ handlers.raceDone = function (args) {
     }
 
     jheld++;
+
+    // para sincronizar mode off.
+    jwins = jwins + lextraWins;
+    jheld = jheld + lextraHelds;    
+    lgemPrize = lgemPrize + lextraGems;
+
     //log.info(" racedone 2.1");
     var playerCurrency;
     if (jsaldo > 0) {
