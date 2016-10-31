@@ -744,6 +744,9 @@ handlers.raceDone = function (args) {
     var jwins = 0;
     var jheld = 0;
     var jsaldo = lcoinsprize - lcost;
+    var maxSaldo = 900;
+    if (jsaldo > maxSaldo)
+        jsaldo = maxSaldo;
 
     //log.info(" racedone 1");
     var playerData = server.GetUserData(
